@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>go栈内存 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="go栈内存" />
+<meta property="og:description" content="go栈内存" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-12T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="go栈内存"/>
+<meta name="twitter:description" content="go栈内存"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" /><link rel="prev" href="https://rickyzhf.cc/posts/middleware/rocketmq%E5%AD%98%E5%82%A8/" /><link rel="next" href="https://rickyzhf.cc/posts/go/channel/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "go栈内存",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/go\/go%E6%A0%88%E5%86%85%E5%AD%98\/"
+        },"genre": "posts","keywords": "go","wordcount":  851 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/go\/go%E6%A0%88%E5%86%85%E5%AD%98\/","datePublished": "2023-02-11T00:00:00+00:00","dateModified": "2023-02-12T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">go栈内存</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-02-11">2023-02-11</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-02-12">2023-02-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 851 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#栈结构">栈结构</a></li>
+    <li><a href="#go栈内存空间">Go栈内存空间</a></li>
+    <li><a href="#栈桢">栈桢</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>应用程序中的内存一般会分为堆和栈两个部分，程序要运行期间可以主动向堆内存申请内存空间，这些内存由内存分配器分配并由垃圾回收期回收。<mark>而栈内存一般由编译器自动分配和释放</mark>。其中主要存储函数局部变量、入参、返回值等数据，这些数据一般会随着函数一起创建和销毁。</p>
+<h2 id="栈结构">栈结构</h2>
+<p>传统的程序虚拟空间分布如下：</p>
+<img src="https://img-blog.csdnimg.cn/img_convert/b4f882b9447760ce5321de109276ec23.png" alt="虚拟内存空间划分" style="zoom: 67%;" />
+<p>对于传统程序而言，程序计数器的缺省值为0，当运行完当前指令则加1，因此代码段数据段文件自然从地地址向搞高地址进行分配。heap从低地址向高地址扩展，是因为做内存管理相对要简单些。</p>
+<p>而为了避免栈空间和堆空间、代码段等冲突，并最大利用地址空间，就会选择把栈底设置在高地址区间，然后让栈向下增长。这样栈底地址是固定的（高地址），只需要移动栈顶指针即可实现栈的扩展。如果将栈从地址开始分配，则栈底地址并不固定（可能面临堆空间快扩容的场景），此时就可能需要将整个栈在内存中移动。<mark>因此对于栈而言，是由高地址向低地址进行分配。</mark></p>
+<p><mark>所以对于程序空间中的栈而言，是一个倒着的栈，栈基在上面（内存高地址），栈顶在下面（内存地地址）。</mark></p>
+<h2 id="go栈内存空间">Go栈内存空间</h2>
+<p>对于Go程序中的栈而言，也是由高地址向低地址进行分配，由一个个栈桢组成，当调用某个函数时，则将一个栈帧由栈顶压入栈。当被调函数执行完毕后，会则撤销当前函数对应的栈桢，也即出栈。对于栈桢而言，有两个包含 BP 和 SP 两个栈寄存器，它们分别存储了栈基地址和栈顶地址，两个地址之间的内容就是一个栈桢。</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202303111455168.png" alt="stack-registers" style="zoom: 67%;" />
+<h2 id="栈桢">栈桢</h2>
+<p>Go 语言中函数栈帧布局由高到低（栈底到栈顶），以下面的代码为例，当程序运行到t函数第2行时如下：</p>
+<ol>
+<li>调用方的栈基地址，用于函数返回后获得调用函数的栈帧基地址：main函数的栈基地址。</li>
+<li>局部变量：a1， b1；</li>
+<li>被调函数返回值：res1，res2；</li>
+<li>被调用函数参数：a1，b1；</li>
+<li>返回地址，保存被调用函数返回后的程序地址，即本函数调用被调用函数的下一条指令地址：res1++指令的地址。</li>
+<li>tt的栈桢：就是重复上面5个部分了。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">t</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">a1</span><span class="p">,</span> <span class="nx">b1</span> <span class="o">:=</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res1</span><span class="p">,</span> <span class="nx">res2</span><span class="o">:=</span> <span class="nf">tt</span><span class="p">(</span><span class="nx">a1</span><span class="p">,</span> <span class="nx">b1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res1</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">res1</span><span class="p">,</span> <span class="nx">res2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">tt</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">res1</span><span class="p">,</span> <span class="nx">res2</span> <span class="o">:=</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">res1</span><span class="p">,</span> <span class="nx">res2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="o">:=</span> <span class="nf">t</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" data-title="go栈内存" data-hashtags="go"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" data-hashtag="go"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" data-title="go栈内存"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" data-title="go栈内存"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/middleware/rocketmq%E5%AD%98%E5%82%A8/" class="prev" rel="prev" title="rocketmq存储设计"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>rocketmq存储设计</a>
+            <a href="/posts/go/channel/" class="next" rel="next" title="channel笔记">channel笔记<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>字符和字符串 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="字符和字符串" />
+<meta property="og:description" content="关于Go中字符的总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-03-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-03T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="字符和字符串"/>
+<meta name="twitter:description" content="关于Go中字符的总结"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" /><link rel="prev" href="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "字符和字符串",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/go\/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2\/"
+        },"genre": "posts","keywords": "go","wordcount":  1810 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/go\/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2\/","datePublished": "2023-03-02T00:00:00+00:00","dateModified": "2023-03-03T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">字符和字符串</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-03-02">2023-03-02</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-03-03">2023-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1810 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#unicodeutf-8">Unicode&amp;UTF-8</a></li>
+    <li><a href="#byte--rune">Byte &amp; Rune</a></li>
+    <li><a href="#遍历字符串">遍历字符串</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="unicodeutf-8">Unicode&amp;UTF-8</h2>
+<p><mark>unicode 是统一所有语言的一套字符集(类似于字典)。utf-8是基于unicode编码的一种节约字节的编码。</mark></p>
+<p>UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间。但是两者并不完全相等，例如unicode一个中文字符占2个字节，而UTF-8一个中文字符占3个字节。既从unicode到utf-8并不是直接的对应，而是要过一些算法和规则来转换。</p>
+<p>简而言之，在内存里统一使用unicode，记录到硬盘或者编辑文本的时候都转换成了utf8。</p>
+<p>ps: ASCII 也是常用的英文单词和符号的小字符集，所以ASCII和Unicode 一样，是一种字符集。</p>
+<h2 id="byte--rune">Byte &amp; Rune</h2>
+<p>Go严格意义上没有char类型，<strong><mark>字符只是整数的特殊用例<mark></strong>。在 Go 中，用于表示字符的 <code>byte</code> 和 <code>rune</code> 类型都是<strong>整型的别名</strong>：</p>
+<ul>
+<li><code>byte</code>类型：长度为 1 个字节，用于表示 ASCII 字符。所以byte类型只能表示英文和部分符号。</li>
+<li><code>rune</code>类型：长度为 4 个字节，用于表示以 UTF-8 编码的 Unicode 码点。Unicode 从 0 开始，为每个符号指定一个编号，这叫做「码点」（code point）。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//byte是uint8的别名，等同于uint8，可以用于区分字节值和8位无符号整数值。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="kt">byte</span> <span class="p">=</span> <span class="kt">uint8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//rune是int32的别名，等同于int32，可以用于区分字符值和整数值。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="kt">rune</span> <span class="p">=</span> <span class="kt">int32</span>
+</span></span></code></pre></div><p>在go中，需要用单引号来声明字符，这点与其他语言一样。声明的类型可以为byte或者rune。<strong>但如果在声明一个字符变量时没有指明类型，Go 会默认它是 <code>rune</code> 类型</strong>：</p>
+<p>因为 <code>byte</code> 实质上是整型 <code>uint8</code>，所以可以直接转成整型值，rune一样。在格式化说明符中我们使用 <code>%c</code> 表示字符，<code>%d</code> 表示整型：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">byteC</span> <span class="kt">byte</span> <span class="p">=</span> <span class="sc">&#39;A&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;字符 %c 的类型为 %T 整型为%v\n&#34;</span><span class="p">,</span> <span class="nx">byteC</span><span class="p">,</span> <span class="nx">byteC</span><span class="p">,</span> <span class="nx">byteC</span><span class="p">)</span> <span class="c1">//字符 j 的类型为 uint8 整型为106
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">runeC</span> <span class="kt">rune</span> <span class="p">=</span> <span class="sc">&#39;A&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;字符 %c 的类型为 %T 整型为%v\n&#34;</span><span class="p">,</span> <span class="nx">runeC</span><span class="p">,</span> <span class="nx">runeC</span><span class="p">,</span> <span class="nx">runeC</span><span class="p">)</span> <span class="c1">//字符 J 的类型为 int32 整型为74
+</span></span></span></code></pre></div><p>之所以需要两个变量主要是为了适配UTF-8的编码方式。</p>
+<p><code>byte</code> 占用一个字节，因此它可以用于表示 ASCII 字符。<strong>但是UTF-8 的长度并不固定，字符长度从 1 个字节到 4 个字节不等</strong>。<code>byte</code> 显然不擅长这样的表示，因为解析的时候无法实时确定处理的 每个UTF-8 字符究竟占了几个字节。因此，如果堆中文字符串按照字节长度进行截取会出现乱码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">testString</span> <span class="o">:=</span> <span class="s">&#34;你好，世界&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">testString</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span> <span class="c1">// 输出乱码�，因为截取了前两个字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">testString</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// 输出「你」，一个中文字符由三个字节表示
+</span></span></span></code></pre></div><p><code>rune</code> 可以解决该问题。利用 <code>[]rune()</code> 将字符串转为 Unicode 码点再进行截取，这样就无需考虑字符串中含有 UTF-8 字符的情况了：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">testString</span> <span class="o">:=</span> <span class="s">&#34;你好，世界&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">testString</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]))</span> <span class="c1">// 输出：「你好」
+</span></span></span></code></pre></div><h2 id="遍历字符串">遍历字符串</h2>
+<p>在go中，<mark>字符串使用utf-8进行编码(1-4为变长编码)，用len获取字符串长度获取到的是的字节长度，所以<strong>通过下标索引遍历字符串是以字节为基本单位的。</strong></mark></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">testString</span> <span class="o">:=</span> <span class="s">&#34;hi,世界&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//len
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">testString</span><span class="p">))</span>                    <span class="c1">//9 2*3+3 : 2个中文字符加3个英文字符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">utf8</span><span class="p">.</span><span class="nf">RuneCountInString</span><span class="p">(</span><span class="nx">testString</span><span class="p">))</span> <span class="c1">//5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//下标遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">testString</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//通过s[i]取出来的c是unit8类型, 既byte
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">c</span> <span class="o">:=</span> <span class="nx">testString</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;下标: %v, 原值: %v, 用%%c取的值: %c\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 0, 原值: 104, 用%c取的值: h
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 1, 原值: 105, 用%c取的值: i
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 2, 原值: 44, 用%c取的值: ,
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 3, 原值: 228, 用%c取的值: ä
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 4, 原值: 184, 用%c取的值: ¸
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 5, 原值: 150, 用%c取的值: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 6, 原值: 231, 用%c取的值: ç
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 7, 原值: 149, 用%c取的值: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 8, 原值: 140, 用%c取的值: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//range遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">c</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">testString</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// range s后，得到的c是int32位类型, 既rune
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;下标: %v, 原值: %v, 用%%c取的值: %c\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 0, 原值: 104, 用%c取的值: h
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 1, 原值: 105, 用%c取的值: i
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 2, 原值: 44, 用%c取的值: ,
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 3, 原值: 19990, 用%c取的值: 世
+</span></span></span><span class="line"><span class="cl"><span class="cm">  下标: 6, 原值: 30028, 用%c取的值: 界
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//修改英文部分，string具有不可修改特性，如果修改bs[1]后直接打印testString会发现数据并没有改变。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">bs</span> <span class="o">:=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">testString</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">bs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;K&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">testString</span> <span class="p">=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">testString</span><span class="p">)</span><span class="c1">//hK,世界
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//修改中文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">runes</span> <span class="o">:=</span> <span class="p">[]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">testString</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">runes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;我&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">testString</span> <span class="p">=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">runes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">testString</span><span class="p">)</span><span class="c1">//我K,世界
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-03-03</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-title="字符和字符串" data-hashtags="go"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-hashtag="go"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-title="字符和字符串"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-title="字符和字符串"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" class="prev" rel="prev" title="rocketmq事务消息"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>rocketmq事务消息</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

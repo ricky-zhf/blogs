@@ -1,0 +1,88 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - 标签 - zhf的技术博客</title>
+        <link>https://rickyzhf.cc/tags/</link>
+        <description>Tags - 标签 - zhf的技术博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>568058082@qq.com (ricky)</managingEditor>
+            <webMaster>568058082@qq.com (ricky)</webMaster><lastBuildDate>Thu, 02 Mar 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://rickyzhf.cc/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>go</title>
+    <link>https://rickyzhf.cc/tags/go/</link>
+    <pubDate>Thu, 02 Mar 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>mq</title>
+    <link>https://rickyzhf.cc/tags/mq/</link>
+    <pubDate>Mon, 27 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/mq/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>grpc</title>
+    <link>https://rickyzhf.cc/tags/grpc/</link>
+    <pubDate>Fri, 03 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/grpc/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>nginx</title>
+    <link>https://rickyzhf.cc/tags/nginx/</link>
+    <pubDate>Thu, 02 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/nginx/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>system</title>
+    <link>https://rickyzhf.cc/tags/system/</link>
+    <pubDate>Sat, 28 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/system/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>uu</title>
+    <link>https://rickyzhf.cc/tags/uu/</link>
+    <pubDate>Fri, 27 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/uu/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>etcd</title>
+    <link>https://rickyzhf.cc/tags/etcd/</link>
+    <pubDate>Fri, 13 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/etcd/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>book</title>
+    <link>https://rickyzhf.cc/tags/book/</link>
+    <pubDate>Wed, 11 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/book/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>设计模式</title>
+    <link>https://rickyzhf.cc/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <pubDate>Thu, 05 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>hugo</title>
+    <link>https://rickyzhf.cc/tags/hugo/</link>
+    <pubDate>Wed, 04 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/tags/hugo/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

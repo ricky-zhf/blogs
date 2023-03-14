@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>clean code笔记 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="clean code笔记" />
+<meta property="og:description" content="clean code读书笔记" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/books/clean-code/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-22T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="clean code笔记"/>
+<meta name="twitter:description" content="clean code读书笔记"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/books/clean-code/" /><link rel="prev" href="https://rickyzhf.cc/posts/go/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" /><link rel="next" href="https://rickyzhf.cc/posts/system/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "clean code笔记",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/books\/clean-code\/"
+        },"genre": "posts","keywords": "book","wordcount":  1476 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/books\/clean-code\/","datePublished": "2023-01-11T00:00:00+00:00","dateModified": "2023-01-22T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">clean code笔记</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/book/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>book</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-01-22">2023-01-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1476 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#有意义的命名">有意义的命名</a>
+      <ul>
+        <li><a href="#名副其实">名副其实</a></li>
+        <li><a href="#误导与区分">误导与区分</a></li>
+      </ul>
+    </li>
+    <li><a href="#函数">函数</a>
+      <ul>
+        <li><a href="#抽象层级">抽象层级</a></li>
+        <li><a href="#函数命名">函数命名</a></li>
+        <li><a href="#函数参数">函数参数</a>
+          <ul>
+            <li><a href="#单参数函数">单参数函数</a></li>
+            <li><a href="#双参数函数">双参数函数</a></li>
+            <li><a href="#输出参数">输出参数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#对象和数据结构">对象和数据结构</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="有意义的命名">有意义的命名</h2>
+<h3 id="名副其实">名副其实</h3>
+<p>保证某一块代码中所有的名字能通过名字知道其意义。</p>
+<ul>
+<li><mark>函数名<mark></li>
+<li><mark>变量名<mark></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="nf">getThem</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">:</span> <span class="n">theList</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="o">(</span><span class="n">x</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">&lt;</span><span class="n">mark</span><span class="o">&gt;</span> <span class="n">4</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">list1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>这段代码有很多模糊的地方。</p>
+<ul>
+<li>theList是什么含义？</li>
+<li>theList中0下标条目是什么含义？</li>
+<li>值4是什么含义？</li>
+<li>返回的list1是什么含义？</li>
+</ul>
+<p>假设这是一个扫雷游戏，theList是单元格列表，其中数据0下标条目的含义是该单元格的状态，为4表示该单元格已标记，最后返回的是已经被标记的单元格List。则对于以上问题可以依次解决：</p>
+<ul>
+<li>theList —— gameBoard；</li>
+<li>对于单元格，应该抽象为一个对象，创建一个Cell类，状态作为对象的一个属性；</li>
+<li>然后未该类写一个方法isFlagged来表示该单元格被标记为4；</li>
+<li>list1 —— flaggedCells</li>
+</ul>
+<p>最后改进后的代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="nf">getFlaggedCells</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">flaggedCells</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">Cell</span> <span class="n">cell</span><span class="o">:</span> <span class="n">gameBoard</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="o">(</span><span class="n">cell</span><span class="o">.</span><span class="na">isFalgged</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">flaggedCells</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cell</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">flaggedCells</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="误导与区分">误导与区分</h3>
+<p>起变量名避免CS的专有名词，如账号列表如果起名accountList，会让人误以为它是一个list类型(如果是可以这样起名)。</p>
+<p>同时，<mark>多使用常量<mark>。</p>
+<h2 id="函数">函数</h2>
+<h3 id="抽象层级">抽象层级</h3>
+<p>每个函数应该是一个抽象层级。在实现代码或者阅读代码时需要按照<mark>向下原则<mark>。使用TO(要***)语句，程序就像是一系列TO+函数名的段落，每一段都描述当前的抽象层级，并引用下一抽象层级。</p>
+<ul>
+<li>既<mark>要(to)更新订单状态<mark>我们先判断，发货成功，则<mark>要(to)<mark>调用处理发货成功的逻辑，发货失败，则调用处理发货失败的逻辑。
+<ul>
+<li><mark>要(to)处理发货成功后的步骤<mark>，我们需要先更新订单，再添加延迟队列，再通知各个依赖放该单已发货成功。
+<ul>
+<li><mark>要(to)通知各个依赖方<mark>，&hellip;</li>
+</ul>
+</li>
+<li><mark>要(to)处理发货失败后的逻辑<mark>，&hellip;</li>
+</ul>
+</li>
+</ul>
+<p>同时各个函数要保证<mark>短小<mark>，每个函数只说一件事。对于if、while等条件语句，其内部的代码块一般建议一行。如果函数只是做了该函数名下同一抽象层的步骤，则函数只做了一件事。<mark>既函数要么做什么事，要么回答什么事<mark></p>
+<p>比如函数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">set</span><span class="o">(</span><span class="n">String</span> <span class="n">attribute</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="o">(</span><span class="n">table</span><span class="o">.</span><span class="na">isExist</span><span class="o">(</span><span class="n">attribute</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table</span><span class="o">.</span><span class="na">attribute</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">set</span><span class="o">(</span><span class="s">&#34;userName&#34;</span><span class="o">,</span> <span class="s">&#34;uncleBob&#34;</span><span class="o">))...</span>
+</span></span></code></pre></div><p>set函数的操作是先判断table中是否有attribute变量，如果有就覆盖为value，如果没有就返回false。但是如果读者只看if语句，则会误以为set成功返回true，失败返回false。一个set既获取信息，又修改信息。所以可以改成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">String</span> <span class="n">attribute</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isExist</span><span class="o">(</span><span class="n">String</span> <span class="n">attribute</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 判断是否存在
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">isExist</span><span class="o">(</span><span class="s">&#34;userName&#34;</span><span class="o">)){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">set</span><span class="o">(</span><span class="s">&#34;userName&#34;</span><span class="o">,</span> <span class="s">&#34;uncleBob&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="函数命名">函数命名</h3>
+<p>不要怕长，越详细越好。<mark>根据函数名就能清楚的知道函数做了什么。<mark></p>
+<p>使用动词+关键字的模式，如assertEquals，就可以改进为assertExpectEqualsActual。</p>
+<h3 id="函数参数">函数参数</h3>
+<p>函数参数越少越好，最好是一到两个，最多不能超过三个。<mark>多参数函数需要考虑将有联系的参数封装成类。<mark></p>
+<h4 id="单参数函数">单参数函数</h4>
+<p>单个入参主要有两种场景：</p>
+<ul>
+<li>获取入参相关信息，如：boolean fileExists(&ldquo;MyFile&rdquo;)</li>
+<li>修改入参相关状态，如：InputStream fileOpen(&ldquo;MyFile&rdquo;)</li>
+</ul>
+<h4 id="双参数函数">双参数函数</h4>
+<p>双参数也可以接受。某些必须情况下的确需要传递两个参数(如坐标)。但是其他场景下可以考虑将两个参数优化成一个参数。例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">writeField</span><span class="o">(</span><span class="n">outputStream</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> 
+</span></span><span class="line"><span class="cl"><span class="o">-&gt;</span><span class="n">将该方法作为outputStream的成员之一</span><span class="err">：</span><span class="n">outputStream</span><span class="o">.</span><span class="na">writeField</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">-&gt;</span><span class="n">把outputStream写成当前类的成员变量</span><span class="err">，</span><span class="n">从而无需再传递它</span><span class="err">。</span>
+</span></span></code></pre></div><h4 id="输出参数">输出参数</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">appendFooter</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+</span></span></code></pre></div><p>这个函数很迷惑，是把什么东西添加到s后面还是把s添加到什么后面？普遍而言，应避免使用输出参数，如果函数必须要修改某种状态，可以修改所属对象的状态。如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="na">appendFooter</span><span class="o">()</span>
+</span></span></code></pre></div><h2 id="对象和数据结构">对象和数据结构</h2>
+<p>描述了对象与数据结构之间的关系，两者是对立的。</p>
+<p>既使用面向对象的代码难以添加新函数，因为需要修改所有的类。</p>
+<p>而面向数据结构的代码难以添加新的数据结构，因为必须修改所有的函数 。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-01-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/books/clean-code/" data-title="clean code笔记" data-hashtags="book"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/books/clean-code/" data-hashtag="book"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/books/clean-code/" data-title="clean code笔记"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/books/clean-code/" data-title="clean code笔记"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/book/">book</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="prev" rel="prev" title="设计模式"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>设计模式</a>
+            <a href="/posts/system/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" class="next" rel="next" title="服务注册与发现">服务注册与发现<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

@@ -1,0 +1,56 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - 分类 - zhf的技术博客</title>
+        <link>https://rickyzhf.cc/categories/</link>
+        <description>Categories - 分类 - zhf的技术博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>568058082@qq.com (ricky)</managingEditor>
+            <webMaster>568058082@qq.com (ricky)</webMaster><lastBuildDate>Thu, 02 Mar 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://rickyzhf.cc/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>go</title>
+    <link>https://rickyzhf.cc/categories/go/</link>
+    <pubDate>Thu, 02 Mar 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/categories/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>middleware</title>
+    <link>https://rickyzhf.cc/categories/middleware/</link>
+    <pubDate>Mon, 27 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/categories/middleware/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>system</title>
+    <link>https://rickyzhf.cc/categories/system/</link>
+    <pubDate>Fri, 03 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/categories/system/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>uu</title>
+    <link>https://rickyzhf.cc/categories/uu/</link>
+    <pubDate>Fri, 27 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/categories/uu/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>book</title>
+    <link>https://rickyzhf.cc/categories/book/</link>
+    <pubDate>Wed, 11 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/categories/book/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>hugo</title>
+    <link>https://rickyzhf.cc/categories/hugo/</link>
+    <pubDate>Wed, 04 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/categories/hugo/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>nginx - 标签 - zhf的技术博客</title>
+        <link>https://rickyzhf.cc/tags/nginx/</link>
+        <description>nginx - 标签 - zhf的技术博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>568058082@qq.com (ricky)</managingEditor>
+            <webMaster>568058082@qq.com (ricky)</webMaster><lastBuildDate>Thu, 02 Feb 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://rickyzhf.cc/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+    <title>nginx学习</title>
+    <link>https://rickyzhf.cc/posts/middleware/nginx/</link>
+    <pubDate>Thu, 02 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/middleware/nginx/</guid>
+    <description><![CDATA[nginx相关内容]]></description>
+</item>
+</channel>
+</rss>

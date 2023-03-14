@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>system - 标签 - zhf的技术博客</title>
+        <link>https://rickyzhf.cc/tags/system/</link>
+        <description>system - 标签 - zhf的技术博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>568058082@qq.com (ricky)</managingEditor>
+            <webMaster>568058082@qq.com (ricky)</webMaster><lastBuildDate>Sat, 28 Jan 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://rickyzhf.cc/tags/system/" rel="self" type="application/rss+xml" /><item>
+    <title>分布式一致性算法</title>
+    <link>https://rickyzhf.cc/posts/system/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/</link>
+    <pubDate>Sat, 28 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/system/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/</guid>
+    <description><![CDATA[几种分布式一致性算法简介]]></description>
+</item>
+</channel>
+</rss>

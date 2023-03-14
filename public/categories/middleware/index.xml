@@ -1,0 +1,48 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>middleware - 分类 - zhf的技术博客</title>
+        <link>https://rickyzhf.cc/categories/middleware/</link>
+        <description>middleware - 分类 - zhf的技术博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>568058082@qq.com (ricky)</managingEditor>
+            <webMaster>568058082@qq.com (ricky)</webMaster><lastBuildDate>Mon, 27 Feb 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://rickyzhf.cc/categories/middleware/" rel="self" type="application/rss+xml" /><item>
+    <title>rocketmq事务消息</title>
+    <link>https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/</link>
+    <pubDate>Mon, 27 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/</guid>
+    <description><![CDATA[rocketmq事务消息介绍]]></description>
+</item>
+<item>
+    <title>rocketmq存储设计</title>
+    <link>https://rickyzhf.cc/posts/middleware/rocketmq%E5%AD%98%E5%82%A8/</link>
+    <pubDate>Sat, 11 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/middleware/rocketmq%E5%AD%98%E5%82%A8/</guid>
+    <description><![CDATA[rocketmq存储设计]]></description>
+</item>
+<item>
+    <title>rocketmq架构</title>
+    <link>https://rickyzhf.cc/posts/middleware/rocketmq%E6%9E%B6%E6%9E%84/</link>
+    <pubDate>Thu, 09 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/middleware/rocketmq%E6%9E%B6%E6%9E%84/</guid>
+    <description><![CDATA[rocketmq架构]]></description>
+</item>
+<item>
+    <title>rocketmq消息消费</title>
+    <link>https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/</link>
+    <pubDate>Thu, 09 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/</guid>
+    <description><![CDATA[rocketmq消息消费总结]]></description>
+</item>
+<item>
+    <title>nginx学习</title>
+    <link>https://rickyzhf.cc/posts/middleware/nginx/</link>
+    <pubDate>Thu, 02 Feb 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/middleware/nginx/</guid>
+    <description><![CDATA[nginx相关内容]]></description>
+</item>
+</channel>
+</rss>

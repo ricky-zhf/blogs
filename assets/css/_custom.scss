@@ -1,0 +1,87 @@
+// .archive-item-date2 {
+//     color: #a9a9b3;
+// }
+
+
+h1 {counter-reset: h2}
+h2 {counter-reset: h3}
+h3 {counter-reset: h4}
+h4 {counter-reset: h5}
+
+article[autonumber] h2 > a::before {counter-increment: h2; content: "#" counter(h2) " "}
+article[autonumber] h3 > a::before {counter-increment: h3; content: "#" counter(h2) "." counter(h3) " "}
+article[autonumber] h4 > a::before {counter-increment: h4; content: "#" counter(h2) "." counter(h3) "." counter(h4) " "}
+
+// article[autonumbering] .toc-content ul { counter-reset: item }
+// article[autonumbering] .toc-content li a:before { content: counters(item, ".") " "; counter-increment: item }
+
+
+// h1 {
+//   counter-reset: h2Counter;
+//  }
+
+// @for $i from 2 through 4 {
+//  h#{$i} {
+//         // 增加当前标题的计数器
+//         counter-increment: h#{$i}Counter;
+//         // 重置下个级别的计数器
+//         counter-reset: h#{$i + 1}Counter;
+    
+//         // 于标题前显示编号
+//         & ::before {
+//             display: inline;
+//             @if $i == 2 {
+//                 content: "#" counter(h2Counter) ;
+//             } @else if $i == 3 {
+//                 content: "#" counter(h2Counter) "." counter(h3Counter);
+//             } @else if $i == 4 {
+//                 content: "#" counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter);
+//             }
+//         }
+//     }
+// }
+
+/* 首页的阅读全文按钮 */
+.single.summary .post-footer a:first-child {
+    position: relative;
+    z-index: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      bottom: 0;
+      left: -0.25em;
+      right: -0.25em;
+      background-color: hsla(341, 10%, 59%, 0.75);
+      transform-origin: center right;
+      transform: scaleX(0);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+      transform-origin: center left;
+    }
+}
+
+
+/* 标题 */
+.page.single h2 {
+    //背景图阴影
+    //box-shadow: rgb(95, 90, 75) 0px 0px 0px 1px, rgba(10, 10, 0, 0.5) 1px 1px 6px 1px;
+    //文字
+    color: rgb(44, 43, 43);
+    font-family: 微软雅黑, 宋体, 黑体, Arial;
+    font-weight: bold;
+    line-height: 1.5;
+    //text-shadow: rgba(34, 34, 34, 0.594) 2px 3px;
+    background: rgba(17, 192, 231, 0.608);
+    border-radius: 3px; //圆角
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 7px;
+    margin: 18px 0px 18px -5px !important;
+}

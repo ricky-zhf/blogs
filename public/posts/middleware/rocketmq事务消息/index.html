@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>rocketmq事务消息 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="rocketmq事务消息" />
+<meta property="og:description" content="rocketmq事务消息介绍" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-01T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="rocketmq事务消息"/>
+<meta name="twitter:description" content="rocketmq事务消息介绍"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" /><link rel="prev" href="https://rickyzhf.cc/posts/go/channel/" /><link rel="next" href="https://rickyzhf.cc/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "rocketmq事务消息",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/middleware\/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF\/"
+        },"genre": "posts","keywords": "mq","wordcount":  1962 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/middleware\/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF\/","datePublished": "2023-02-27T00:00:00+00:00","dateModified": "2023-03-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">rocketmq事务消息</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/middleware/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>middleware</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-02-27">2023-02-27</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-03-01">2023-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1962 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#事务消息">事务消息</a>
+      <ul>
+        <li><a href="#消息流程">消息流程</a></li>
+        <li><a href="#补偿流程">补偿流程</a></li>
+        <li><a href="#消息设计">消息设计</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="事务消息">事务消息</h2>
+<p>这里RocketMQ采用了<mark>2PC的思想来实现了提交事务消息<mark>，同时增加一个<mark>补偿逻辑<mark>来处理二阶段超时或者失败的消息，如下图所示。</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211031428355.png" alt="事务消息" style="zoom: 33%;" />
+<h3 id="消息流程">消息流程</h3>
+<ul>
+<li>发送半消息</li>
+<li>服务端回应消息写入结果</li>
+<li>根据写入结果执行本地事务（如果写入失败，此时half消息对业务不可见，本地逻辑不执行）。</li>
+<li>根据本地事务状态执行Commit或者Rollback（Commit操作生成消息索引，消息对消费者可见）。</li>
+</ul>
+<h3 id="补偿流程">补偿流程</h3>
+<p>补偿阶段用于解决消息Commit或者Rollback发生超时或者失败的情况。</p>
+<ul>
+<li>对没有Commit/Rollback的事务消息（pending状态的消息），从服务端发起一次“回查”</li>
+<li>Producer收到回查消息，检查回查消息对应的本地事务的状态</li>
+<li>根据本地事务状态，重新Commit或者Rollback</li>
+</ul>
+<h3 id="消息设计">消息设计</h3>
+<p><strong>1.事务消息在一阶段对用户不可见</strong></p>
+<p>在RocketMQ事务消息的主要流程中，一阶段的消息如何对用户不可见。其中，事务消息相对普通消息最大的特点就是一阶段发送的消息对用户是不可见的。那么，如何做到写入消息但是对用户不可见呢？RocketMQ事务消息的做法是：<mark>如果消息是half消息，将备份原消息的主题与消息消费队列，然后改变主题为RMQ_SYS_TRANS_HALF_TOPIC。由于消费组未订阅该主题，故消费端无法消费half类型的消息，然后RocketMQ会开启一个定时任务，从Topic为RMQ_SYS_TRANS_HALF_TOPIC中拉取消息进行回查，根据生产者组获取一个服务提供者发送回查事务状态请求，根据事务状态来决定是提交或回滚消息。<mark></p>
+<p>在RocketMQ中，消息在服务端的存储结构如下，每条消息都会有对应的索引信息，Consumer通过ConsumeQueue这个二级索引来读取消息实体内容，其流程如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022304295.png" alt="img" style="zoom:50%;" />
+<p>RocketMQ的具体实现策略是：写入的如果事务消息，对消息的Topic和Queue等属性进行替换，同时将原来的Topic和Queue信息存储到消息的属性中，正因为消息主题被替换，故消息并不会转发到该原主题的消息消费队列，消费者无法感知消息的存在，不会消费。其实改变消息主题是RocketMQ的常用“套路”，回想一下延时消息的实现机制。</p>
+<p><strong>2.Commit和Rollback操作以及Op消息的引入</strong></p>
+<p>在完成一阶段写入一条对用户不可见的消息后，二阶段如果是Commit操作，则需要让消息对用户可见；如果是Rollback则需要撤销一阶段的消息。</p>
+<p>由于 RocketMQ 的 appendOnly 特性，Broker通过 OP 消息实现标记删除。Broker 流程参考下图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061837121.jpg"
+        data-srcset="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061837121.jpg, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061837121.jpg 1.5x, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061837121.jpg 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061837121.jpg"
+        title="img" /></p>
+<ul>
+<li><strong>Commit</strong>。Broker 写入 OP 消息，OP 消息的 body 指定 Commit 消息的 queueOffset，标记之前 Half 消息已被删除；同时，Broker 读取原 Half 消息，把 Topic 还原，重新写入 CommitLog，消费者则可以拉取消费；</li>
+<li><strong>Rollback</strong>。Broker 同样写入 OP 消息，流程和 Commit 一样。但后续不会读取和还原 Half 消息。这样消费者就不会消费到该消息。</li>
+</ul>
+<p><strong>3.Op消息的存储和对应关系</strong></p>
+<p>RocketMQ将Op消息写入到全局一个特定的Topic中。这个Topic是一个内部的Topic（像Half消息的Topic一样），不会被用户消费。Op消息的内容为对应的Half消息的存储的Offset，这样通过Op消息能索引到Half消息进行后续的回查操作。</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022304634.png" alt="img" style="zoom: 67%;" />
+<p><strong>4.Half消息的索引构建</strong></p>
+<p>在执行二阶段Commit操作时，需要构建出Half消息的索引。一阶段的Half消息由于是写到一个特殊的Topic，所以二阶段构建索引时需要读取出Half消息，并将Topic和Queue替换成真正的目标的Topic和Queue，之后通过一次普通消息的写入操作来生成一条对用户可见的消息。所以R<mark>ocketMQ事务消息二阶段其实是利用了一阶段存储的消息的内容，在二阶段时恢复出一条完整的普通消息，然后走一遍消息写入流程。<mark></p>
+<p><strong>5.如何处理二阶段失败的消息？</strong></p>
+<p>如果在RocketMQ事务消息的二阶段过程中失败了，例如在做Commit操作时，出现网络问题导致Commit失败，那么需要通过一定的策略使这条消息最终被Commit。</p>
+<p>RocketMQ采用了一种补偿机制，称为“回查”。Broker通过异步线程定期执行(默认30s)，针对这些确实OP消息的办消息进行回查。起主要是将消息发送到对应的Producer端（同一个Group的Producer），由Producer根据消息来检查本地事务的状态，进而执行Commit或者Rollback。Broker端通过对比Half消息和OP消息进行事务消息的回查并且推进CheckPoint（记录那些事务消息的状态是确定的）。</p>
+<p>值得注意的是，rocketmq并不会无休止的的信息事务状态回查，默认回查15次，如果15次回查还是无法得知事务状态，rocketmq默认回滚该消息。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-03-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" data-title="rocketmq事务消息" data-hashtags="mq"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" data-hashtag="mq"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" data-title="rocketmq事务消息"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" data-title="rocketmq事务消息"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mq/">mq</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go/channel/" class="prev" rel="prev" title="channel笔记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>channel笔记</a>
+            <a href="/posts/go/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="next" rel="next" title="字符和字符串">字符和字符串<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

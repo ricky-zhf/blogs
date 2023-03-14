@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>rocketmq消息消费 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="rocketmq消息消费" />
+<meta property="og:description" content="rocketmq消息消费总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-14T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="rocketmq消息消费"/>
+<meta name="twitter:description" content="rocketmq消息消费总结"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/" /><link rel="prev" href="https://rickyzhf.cc/posts/go/%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E4%BB%AC/" /><link rel="next" href="https://rickyzhf.cc/posts/middleware/rocketmq%E6%9E%B6%E6%9E%84/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "rocketmq消息消费",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/middleware\/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9\/"
+        },"genre": "posts","keywords": "mq","wordcount":  4291 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/middleware\/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9\/","datePublished": "2023-02-09T00:00:00+00:00","dateModified": "2023-02-14T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">rocketmq消息消费</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/middleware/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>middleware</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-02-09">2023-02-09</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-02-14">2023-02-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4291 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#消费者组">消费者组</a></li>
+    <li><a href="#消息获取">消息获取</a></li>
+    <li><a href="#消费模式">消费模式</a></li>
+    <li><a href="#消息处理">消息处理</a></li>
+    <li><a href="#消息过滤">消息过滤</a></li>
+    <li><a href="#消费重试">消费重试</a></li>
+    <li><a href="#消息不丢失">消息不丢失</a></li>
+    <li><a href="#重复消费">重复消费</a>
+      <ul>
+        <li><a href="#产生原因">产生原因</a></li>
+        <li><a href="#解决办法">解决办法</a></li>
+      </ul>
+    </li>
+    <li><a href="#消息堆积">消息堆积</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="消费者组">消费者组</h2>
+<p>RocketMQ中，订阅者的概念是通过消费组（Consumer Group）来体现的。</p>
+<ul>
+<li>
+<p><mark>每个消费组都消费主题中的所有队列，不同消费组之间消费进度彼此不受影响<mark>，也就是说，一条消息被Consumer Group1消费过，也会再给Consumer Group2消费。</p>
+</li>
+<li>
+<p>消费组中包含多个消费者，<mark>同一个组内的消费者是竞争消费的关系，每个消费者负责消费某条队列中的消息。<mark>默认情况，如果一条消息被消费者Consumer1消费了，那同组的其他消费者就不会再收到这条消息。</p>
+</li>
+</ul>
+<p><mark>消费逻辑大致为：<mark></p>
+<ul>
+<li>每个消费者<strong>组</strong>消费Topic下的所有队列，该组中每个消息可以消费多个消息队列，但是每个消息队列同一时间只能被同一消费组内的一个消费者消费；</li>
+<li>同一个Topic可以被多个消费者<strong>组</strong>消费，同一条队列可以被不同消费者组的消费者消费</li>
+</ul>
+<p>在消息队列RocketMQ版领域模型中，同一条消息支持被多个消费者分组订阅，同时，对于每个消费者分组可以初始化多个消费者。您可以根据消费者分组和消费者的不同组合，实现以下两种不同的消费效果：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211031435832.png" alt="消费方式" style="zoom: 33%;" />
+<ul>
+<li>消费组间广播消费：如上图所示，<mark>每个消费者分组只初始化唯一一个消费者<mark>，<mark>每个消费者可消费到消费者分组内所有的消息<mark>，各消费者分组都订阅相同的消息，以此实现单客户端级别的广播一对多推送效果。<mark>该方式一般可用于网关推送、配置推送等场景。<mark></li>
+<li>消费组内共享消费：如上图所示，<mark>每个消费者分组下初始化了多个消费者，这些消费者共同分担消费者分组内的所有消息<mark>，实现消费者分组内流量的水平拆分和均衡负载。<mark>该方式一般可用于微服务解耦场景。<mark></li>
+</ul>
+<h2 id="消息获取">消息获取</h2>
+<p><a href="https://www.jianshu.com/p/70800fe967fd" target="_blank" rel="noopener noreffer ">https://www.jianshu.com/p/70800fe967fd</a></p>
+<p>一般消息消费的模式有两种方式：</p>
+<ul>
+<li><mark>Push Consumer：消息由RocketMQ送至Consumer。<mark></li>
+<li>Pull Consumer：该类Consumer主动从RocketMQ拉取消息。目前仅TCP Java SDK支持该类Consumer。</li>
+</ul>
+<p>这两种方式都有各自的缺点：</p>
+<ol>
+<li>拉取：拉取的间隔不好确定，间隔太短没消息时会造成带宽浪费，间隔太长又会造成消息不能及时被消费</li>
+<li>推送：<strong>「推送和速率难以适配消费速率」</strong>，推的太快，消费者消费不过来怎么办？推的太慢消息不能及时被消费</li>
+</ol>
+<p>RocketMQ结合了两种模式(实质上还是pull)，<mark>Consumer发送拉取请求到Broker端，如果Broker有数据则返回，然后Consumer端再次拉取。如果Broker端没有数据，不立即返回，而是等待一段时间（例如5s）。<mark></p>
+<ul>
+<li>如果在等待的这段时间，有新消息到来，则激活consumer发送来hold的请求，立即将消息通过channel写入consumer客户，随后Consumer端再次拉取。</li>
+<li>如果等待超时（例如5s），也会直接返回，不会将这个请求一直hold住，Consumer端再次拉取。</li>
+</ul>
+<p><mark>长轮询解决轮询带来的频繁请求服务端但是没有的问题一旦新的数据到了，那么消费者能立马就可以获取到新的数据，所以从效果上，有点像是push的感觉。<mark></p>
+<h2 id="消费模式">消费模式</h2>
+<p>默认情况下就是<strong>集群消费</strong>，当使用集群消费模式时，<mark>消息队列RocketMQ版认为任意一条消息只需要被集群内的任意一个消费者处理即可。<mark></p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061448467.png" alt="集群消费" style="zoom:50%;" />
+<p>当使用<strong>广播消费模式</strong>时，消息队列RocketMQ版会将每条消息推送给集群内所有的消费者，<mark>保证消息至少被每个消费者消费一次。<mark></p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061449475.png" alt="广播消费" style="zoom: 50%;" />
+<h2 id="消息处理">消息处理</h2>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061442834.png" alt="img" style="zoom: 67%;" />
+<p>当拉取到消息后，消息会被放入msgTreeMap，其中key为消息的offset，value为消息实体。</p>
+<p>另外还有一个重要的属性dropped，和重平衡相关，重平衡的时候会造成消息的重复消费。</p>
+<p>msgCount（未消费消息总数）和msgSize（未消费消息大小）是和流控相关的。</p>
+<h2 id="消息过滤">消息过滤</h2>
+<p>RocketMQ分布式消息队列的消息过滤方式有别于其它MQ中间件，<mark>是在Consumer端订阅消息时再做消息过滤的<mark>。<mark>RocketMQ这么做是在于其Producer端写入消息和Consumer端订阅消息采用分离存储的机制来实现的，Consumer端订阅消息是需要通过ConsumeQueue这个消息消费的逻辑队列拿到一个索引，然后再从CommitLog里面读取真正的消息实体内容，所以说到底也是还绕不开其存储结构。<mark>其ConsumeQueue的存储结构如下，可以看到其中有8个字节存储的Message Tag的哈希值，基于Tag的消息过滤正是基于这个字段值的。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022217853.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022217853.png, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022217853.png 1.5x, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022217853.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211022217853.png"
+        title="img" /></p>
+<p>主要支持如下2种的过滤方式</p>
+<ul>
+<li>Tag过滤方式：Consumer端在订阅消息时除了指定Topic还可以指定TAG，如果一个消息有多个TAG，可以用||分隔。其中，Consumer端会将这个订阅请求构建成一个 SubscriptionData，发送一个Pull消息的请求给Broker端。Broker端从RocketMQ的文件存储层—Store读取数据之前，会用这些数据先构建一个MessageFilter，然后传给Store。Store从 ConsumeQueue读取到一条记录后，会用它记录的消息tag hash值去做过滤，由于在服务端只是根据hashcode进行判断，无法精确对tag原始字符串进行过滤，故在消息消费端拉取到消息后，还需要对消息的原始tag字符串进行比对，如果不同，则丢弃该消息，不进行消息消费。</li>
+<li>SQL92的过滤方式：这种方式的大致做法和上面的Tag过滤方式一样，只是在Store层的具体过滤过程不太一样，真正的 SQL expression 的构建和执行由rocketmq-filter模块负责的。每次过滤都去执行SQL表达式会影响效率，所以RocketMQ使用了BloomFilter避免了每次都去执行。SQL92的表达式上下文为消息的属性。</li>
+</ul>
+<h2 id="消费重试">消费重试</h2>
+<p><a href="https://help.aliyun.com/document_detail/440356.html" target="_blank" rel="noopener noreffer ">https://help.aliyun.com/document_detail/440356.html</a></p>
+<p>消费重试指的是，消费者在消费某条消息失败后，消息队列RocketMQ版服务端会根据重试策略重新消费该消息，超过一次定数后若还未消费成功，则该消息将不再继续重试，直接被发送到死信队列中。</p>
+<h2 id="消息不丢失">消息不丢失</h2>
+<p>消息可能在哪些阶段丢失呢？可能会在这三个阶段发生丢失：生产阶段、存储阶段、消费阶段。所以要从这三个阶段考虑：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211061618351.png" alt="图片" style="zoom: 67%;" />
+<p><strong>Producer</strong></p>
+<ul>
+<li>
+<p>可以采取send()同步发消息，发送结果是同步感知的。发送失败后可以重试，设置重试次数，默认2次。</p>
+</li>
+<li>
+<p>集群部署，比如发送失败了的原因可能是当前Broker宕机了，重试的时候会发送到其他Broker上。</p>
+</li>
+</ul>
+<p><strong>Broker</strong></p>
+<ul>
+<li>
+<p>同步刷盘和异步刷盘，不管哪种刷盘都可以保证消息一定存储在pagecache中（内存中），但是同步刷盘更可靠，它是Producer发送消息后等数据持久化到磁盘之后再返回响应给Producer。所以修改刷盘策略为同步刷盘，默认情况下是异步刷盘的。flushDiskType = SYNC_FLUSH</p>
+</li>
+<li>
+<p>Broker通过主从模式来保证高可用，Broker支持Master和Slave同步复制、Master和Slave异步复制模式，生产者的消息都是发送给Master，但是消费既可以从Master消费，也可以从Slave消费。同步复制模式可以保证即使Master宕机，消息肯定在Slave中有备份，保证了消息不会丢失。</p>
+</li>
+</ul>
+<p><strong>Consumer</strong></p>
+<ul>
+<li>Consumer保证消息成功消费的关键在于确认的时机，不要在收到消息后就立即发送消费确认，而是应该在执行完所有消费业务逻辑之后，再发送消费确认。因为消息队列维护了消费的位置，逻辑执行失败了，没有确认，再去队列拉取消息，就还是之前的一条。</li>
+</ul>
+<h2 id="重复消费">重复消费</h2>
+<h3 id="产生原因">产生原因</h3>
+<p>MQ重复消费是指同一个应用的多个实例收到相同的消息，或者同一个实例收到多次相同的消息，若消费者逻辑未做幂等处理，就会造成重复消费。消息重复这个问题本质上是MQ设计上的at least once 还是exactly once的问题，消费者肯定想要exactly once，但MQ要保证消息投递的可靠性，对未ack的消息，会重复投递。</p>
+<ul>
+<li>
+<p>正常情况下在consumer真正消费完消息后应该发送ack，通知broker该消息已正常消费。<strong>当ack因为网络原因无法发送到broker，broker会认为此条消息没有被消费</strong>，此后会开启消息重投机制把消息再次投递到consumer。</p>
+</li>
+<li>
+<p>在CLUSTERING集群消费模式下，消息在broker中会保证相同group的consumer消费一次，但是针对不同group的consumer会推送多次。</p>
+</li>
+</ul>
+<h3 id="解决办法">解决办法</h3>
+<p>因此消费者端要自己保证消费的幂等性，方法如：消费者收到消息后，从消息中获取消息标识写入到Redis或数据库，当再次收到该消息时就不作处理。消息重复投递的场景，除重试外，很大一部分来自于负载均衡阶段，前一个监听Queue的消费实例拉取的消息未全部ack，新的消费实例监听到这个Queue重新拉取消息。</p>
+<p>基本上解决办法有如下几种：</p>
+<ul>
+<li>业务幂等，数据库乐观锁；</li>
+<li>消息去重：这种方法，需要保证每条消息都有一个惟一的编号，通常是业务相关的，比如订单号，消费的记录需要落库，<mark>而且需要保证和消息确认这一步的原子性。<mark></li>
+<li>分布式锁；</li>
+</ul>
+<h2 id="消息堆积">消息堆积</h2>
+<p>Producer已经将消息发送到消息队列RocketMQ版的服务端，但由于Consumer消费能力有限，未能在短时间内将所有消息正确消费掉，此时在消息队列服务端保存着未被消费的消息，该状态即消息堆积。</p>
+<p><strong>消息堆积量=处理中消息量+已就绪消息量</strong>，具体的指标含义，可参考以下说明：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202211052346679.png" alt="相关概念" style="zoom:33%;" />
+<p>上图表示指定Topic的某一队列中各消息的状态。</p>
+<ul>
+<li>
+<p><strong>处理中消息</strong>：在消费者客户端正在处理中但客户端还未返回消费成功响应的消息。</p>
+</li>
+<li>
+<p><strong>已就绪消息</strong>：消息在消息队列已就绪，可以被消费者消费的消息。已就绪消息量指标反映还未被消费者开始处理的消息规模。</p>
+<ul>
+<li>
+<p>已就绪消息的就绪时间：</p>
+<ul>
+<li>普通消息：消息的存储时间。</li>
+<li>定时/延时消息：定时或延时结束时间。</li>
+<li>事务消息：事务提交时间。</li>
+</ul>
+</li>
+<li>
+<p>已就绪消息的排队时间：最早一条就绪消息的就绪时间和当前时间差。</p>
+<p>该指标反映了还未被处理的消息的延迟时间大小，对于时间敏感的业务来说是非常重要的度量指标。</p>
+<p>示例：如上图所示，最早一条就绪消息M1的就绪时间为12:00:00，最后一条就绪消息M2的就绪时间为12:00:30。假设当前时间为12:00:50，则已就绪消息排队时间=当前时间－M1消息的就绪时间=50秒。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><mark>解决方案：<mark></p>
+<p>首先判断消息挤压的原因</p>
+<ul>
+<li>如果是Producer太多而Consumer太少，且消息消费速度正常，则可以通过暂时上线多个Consumer来临时解决消息堆积问题；</li>
+<li>如果当前Topic的Message Queue的数量小于或者等于消费者数量，这种情况，再扩容消费者就没什么用，<mark>就得考虑扩容Message Queue<mark>。
+<ul>
+<li>可以新建一个临时的Topic，临时的Topic多设置一些Message Queue，</li>
+<li>然后先用一些消费者把消费的数据丢到临时的Topic，因为不用业务处理，只是转发一下消息，还是很快的。</li>
+<li>扩容多台消费者去消费新的Topic里的数据。</li>
+<li>消费完了之后，恢复原状。</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考">参考</h2>
+<p><a href="https://help.aliyun.com/document_detail/440186.html" target="_blank" rel="noopener noreffer ">https://help.aliyun.com/document_detail/440186.html</a></p>
+<p><a href="https://github.com/apache/rocketmq/blob/master/docs/cn/features.md#%E7%89%B9%E6%80%A7features" target="_blank" rel="noopener noreffer ">https://github.com/apache/rocketmq/blob/master/docs/cn/features.md#%E7%89%B9%E6%80%A7features</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/" data-title="rocketmq消息消费" data-hashtags="mq"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/" data-hashtag="mq"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/" data-title="rocketmq消息消费"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/middleware/rocketmq%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/" data-title="rocketmq消息消费"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mq/">mq</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go/%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E4%BB%AC/" class="prev" rel="prev" title="遇到的坑们"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>遇到的坑们</a>
+            <a href="/posts/middleware/rocketmq%E6%9E%B6%E6%9E%84/" class="next" rel="next" title="rocketmq架构">rocketmq架构<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

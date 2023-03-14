@@ -1,0 +1,6 @@
+发布public：
+rsync -avuz --progress --delete public/ root@43.136.110.137:/home/public/
+
+hugo -F --cleanDestinationDir
+
+rsync -avuz --progress --delete public/ root@43.136.68.254:/home/public/

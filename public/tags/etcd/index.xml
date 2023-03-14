@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>etcd - 标签 - zhf的技术博客</title>
+        <link>https://rickyzhf.cc/tags/etcd/</link>
+        <description>etcd - 标签 - zhf的技术博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>568058082@qq.com (ricky)</managingEditor>
+            <webMaster>568058082@qq.com (ricky)</webMaster><lastBuildDate>Fri, 13 Jan 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://rickyzhf.cc/tags/etcd/" rel="self" type="application/rss+xml" /><item>
+    <title>服务注册与发现</title>
+    <link>https://rickyzhf.cc/posts/system/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</link>
+    <pubDate>Fri, 13 Jan 2023 00:00:00 &#43;0000</pubDate>
+    <author>ricky</author>
+    <guid>https://rickyzhf.cc/posts/system/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</guid>
+    <description><![CDATA[基于etcd实现的建议服务注册发现]]></description>
+</item>
+</channel>
+</rss>

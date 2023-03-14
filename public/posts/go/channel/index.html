@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>channel笔记 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="channel笔记" />
+<meta property="og:description" content="关于Go中channel的总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/go/channel/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-22T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="channel笔记"/>
+<meta name="twitter:description" content="关于Go中channel的总结"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/go/channel/" /><link rel="prev" href="https://rickyzhf.cc/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" /><link rel="next" href="https://rickyzhf.cc/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "channel笔记",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/go\/channel\/"
+        },"genre": "posts","keywords": "go","wordcount":  3260 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/go\/channel\/","datePublished": "2023-02-19T00:00:00+00:00","dateModified": "2023-02-22T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">channel笔记</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-02-19">2023-02-19</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-02-22">2023-02-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3260 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#csp">CSP</a></li>
+    <li><a href="#数据结构">数据结构</a></li>
+    <li><a href="#缓冲区">缓冲区</a>
+      <ul>
+        <li><a href="#无缓冲通道">无缓冲通道</a></li>
+        <li><a href="#有缓冲通道">有缓冲通道</a></li>
+      </ul>
+    </li>
+    <li><a href="#channel操作">channel操作</a>
+      <ul>
+        <li><a href="#for">for</a></li>
+        <li><a href="#for-range">for range</a></li>
+        <li><a href="#select">select</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="csp">CSP</h2>
+<p>Go 语言中最常见的、也是经常被人提及的设计模式就是：<mark>不要通过共享内存的方式进行通信，而是应该通过通信的方式共享内存。<mark>在很多主流的编程语言中，多个线程传递数据的方式一般都是共享内存，为了解决线程竞争，我们需要限制同一时间能够读写这些变量的线程数量。</p>
+<p>虽然我们在 Go 语言中也能使用共享内存加互斥锁进行通信，但是 Go 语言提供了一种不同的并发模型，即通信顺序进程（Communicating sequential processes，CSP）。Goroutine 和 Channel 分别对应 CSP 中的实体和传递信息的媒介，<mark>Goroutine 之间会通过 Channel 传递数据。<mark>Go语言中的channel是一种特殊的类型，一个先进先出的队列。每一个通道都只传输一个具体类型，也就是声明channel的时候需要为其指定元素类型。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302238735.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302238735.png, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302238735.png 1.5x, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302238735.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302238735.png"
+        title="channel-and-goroutines" /></p>
+<p>目前Go中的channel还是一个有锁的先进先出队列。但是社区也在讨论无锁的实现方式。</p>
+<p>通过通信的方式来共享内存，说成人话就是Goroutine A和Goroutine B建立了管道C，通过管道获取和接受的方式来共享变量。例子可以参考：https://qcrao91.gitbook.io/go/channel/channel-fa-song-he-jie-shou-yuan-su-de-ben-zhi-shi-shi-mo</p>
+<h2 id="数据结构">数据结构</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">hchan</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">qcount</span>   <span class="kt">uint</span> <span class="c1">//当前缓冲中元素个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">dataqsiz</span> <span class="kt">uint</span> <span class="c1">//循环数组的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">buf</span>      <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">//指向缓冲区内存，这块内存空间可容纳`dataqsize`个元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">elemsize</span> <span class="kt">uint16</span> <span class="c1">//当前 Channel 能够收发的元素大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">closed</span>   <span class="kt">uint32</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">elemtype</span> <span class="o">*</span><span class="nx">_type</span> <span class="c1">//当前 Channel 能够收发的元素类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">sendx</span>    <span class="kt">uint</span> <span class="c1">// 缓冲区中下一个元素写入时的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">recvx</span>    <span class="kt">uint</span> <span class="c1">// 缓冲区中下一个被读取的元素的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">recvq</span>    <span class="nx">waitq</span> <span class="c1">// 当前 Channel 由于缓冲区空间不足而阻塞导致等待接受的Goroutine 队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">sendq</span>    <span class="nx">waitq</span> <span class="c1">// 当前 Channel 由于缓冲区空间不足而阻塞导致等待发送的Goroutine 队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">lock</span> <span class="nx">mutex</span> <span class="c1">//保证每个读 channel 或写 channel 的操作都是原子的。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302252951.png" alt="img" style="zoom: 50%;" />
+<p><code>channel</code>是一种类型，一种引用类型。声明通道类型的格式如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="kd">var</span> <span class="nx">变量</span> <span class="kd">chan</span> <span class="nx">元素类型</span>
+</span></span><span class="line"><span class="cl"> <span class="o">--</span>
+</span></span><span class="line"><span class="cl"> <span class="kd">var</span> <span class="nx">ch1</span> <span class="kd">chan</span> <span class="kt">int</span>   <span class="c1">// 声明一个传递整型的通道
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="kd">var</span> <span class="nx">ch2</span> <span class="kd">chan</span> <span class="kt">bool</span>  <span class="c1">// 声明一个传递布尔型的通道
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="kd">var</span> <span class="nx">ch3</span> <span class="kd">chan</span> <span class="p">[]</span><span class="kt">int</span> <span class="c1">// 声明一个传递int切片的通道
+</span></span></span></code></pre></div><p>通道是引用类型，通道类型的空值是<code>nil</code>。声明的通道后需要使用<code>make</code>函数初始化之后才能使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="nx">元素类型</span><span class="p">,</span> <span class="p">[</span><span class="nx">缓冲大小</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">//go语言中需要make的 slice map channel
+</span></span></span></code></pre></div><p>缓冲大小可填可不填。</p>
+<h2 id="缓冲区">缓冲区</h2>
+<p>缓冲区底层是一个循环数组，工作机制类似于<mark>环形队列<mark>：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302307585.jpg"
+        data-srcset="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302307585.jpg, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302307585.jpg 1.5x, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302307585.jpg 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202301302307585.jpg"
+        title="img" /></p>
+<p>环形队列使得我们可以保证缓冲区有序，并且不需要在每次取出元素时对缓冲区重新排序。当缓冲区满了时，向缓冲区添加元素的协程将被加入<code>sender</code>链表中，并且切换到等待状态。之后，当程序读取缓冲区时，<code>recvx</code>位置的元素将被返回，等待状态的协程将恢复执行，它要发送的值将被存入缓冲区。这使得 channel 能够保证<code>先进先出</code>的特性。</p>
+<p>对于channel，有误缓冲区的场景下进行读写操作会有不同的结果：</p>
+<ul>
+<li>向一个无缓冲区的channel发送数据，会阻塞 ；</li>
+<li>从一个无缓冲区的channel 接收数据，会阻塞；</li>
+<li>向一个已经关闭的 channel 发送数据(无论是否有缓冲区)，会引起 panic ；</li>
+<li>从一个已经关闭的 channel 接收数据，如果缓冲区为空(无论是原本就是无缓冲区还是缓冲区的值读完了)，则返回一个零值。否则返回缓冲区中的值；</li>
+</ul>
+<p>对于缓冲区的读写问题有一个口诀(<a href="https://www.yuque.com/aceld/golang/ahkkr1" target="_blank" rel="noopener noreffer ">参考</a>)：<mark>空读写阻塞，写关闭异常，读关闭空零。</mark></p>
+<h3 id="无缓冲通道">无缓冲通道</h3>
+<p>无缓冲的通道又称为阻塞的通道。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;发送成功&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span></code></pre></div><p>上面这段代码能够通过编译，但是执行的时会出现<mark>死锁错误</mark>，即程序被挂起导致死锁。因为<mark>无缓冲的通道只有在接收方准备就绪后才能发送值给该管道，在此之前则一直处于阻塞状态。</mark>因此上面的代码会一直阻塞在第三行。同理，如果对一个无缓冲通道执行接收操作时，没有任何向通道中发送值的操作那么也会导致接收操作阻塞。</p>
+<p>使用无缓冲通道进行通信将导致发送和接收的<code>goroutine</code>同步化。因此，无缓冲通道也被称为<code>同步通道</code>。</p>
+<p>注意，上述的死锁一般只出现在主协程中，即如果主协程只对某个channel发送或者接受值，而没有其他协程做对应操作，则会发生死锁阻塞问题。但是如果是子协程则不会出现这个问题，如下面的程序会正常输出end，而不会发生死锁。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;end&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>像如下代码能正常编译执行，但是什么都没打印就结束。因为进程结束，导致所有流程终止。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ch</span> <span class="o">&lt;-</span> <span class="s">&#34;aa&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>简而言之，对于无缓冲通道的分析主要就是：</p>
+<ul>
+<li><mark>在通道close前，检查各阶段通道的读写操作是否能一一对应，以此来判断是否产生死锁问题；</mark></li>
+<li>close后，就是写关闭异常，读关闭空零的问题。</li>
+</ul>
+<h3 id="有缓冲通道">有缓冲通道</h3>
+<p>如果不想产生阻塞，则可以使用有缓冲通道。如下代码能正常输入aa。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ch</span> <span class="o">&lt;-</span> <span class="s">&#34;aa&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="channel操作">channel操作</h2>
+<p>channel有三种操作，send，receive, close。</p>
+<p>发送和接收都使用<code>&lt;-</code>符号</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="mi">10</span><span class="c1">//赋值语句右边赋值给左边，将10赋值给ch通道，就是发送10给ch通道。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">x</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">ch</span><span class="c1">//赋值语句右边赋值给左边, x从ch通道接受一个值。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">//&lt;-ch       从ch中接收值，忽略结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nb">close</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+</span></span></code></pre></div><p>关于关闭通道需要注意的事情是，只有在通知接收方goroutine所有的数据都发送完毕的时候才需要关闭通道。通道是可以被垃圾回收机制回收的，它和关闭文件是不一样的，在结束操作之后关闭文件是必须要做的，但关闭通道不是必须的。</p>
+<p>一般而言需要<mark>总是先接收后发送，并由发送端来关闭。</mark></p>
+<p>对于接收值还可以通过下面这种方式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">value</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">ch</span>
+</span></span></code></pre></div><ul>
+<li>value：从通道中取出的值。</li>
+<li>ok：通道关闭为 false，否则为true。</li>
+</ul>
+<p>如果需要循环接受缓冲区的值，有3种方式。</p>
+<h3 id="for">for</h3>
+<p>for循环和下面的range循环在无缓冲管道的场景下都需要注意两个点：</p>
+<ul>
+<li>发送方需要关闭管道。否则接收方通过for循环读取时会报死锁错误，因为不关闭管道，当接收方读完管道内数据后，会一直阻塞。因为第四行的for循环执行完了，但是接收方继续for循环，在11行时由于没有发送方所以死锁。</li>
+<li>接收方需要判断管道是否关闭然后选择是否跳出for循环。否则当发送方发完数据并关闭管道后，接收方会一直读出零值。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span> <span class="o">&lt;-</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;通道写入&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">close</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">i</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">c</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;通道读出:&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Finished&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道写入 0
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道读出: 0
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道读出: 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道写入 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道写入 2
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道读出: 2
+</span></span></span><span class="line"><span class="cl"><span class="cm">Finished*/</span>
+</span></span></code></pre></div><h3 id="for-range">for range</h3>
+<p>for range会在管道关闭后自动退出，而不需要像for循环那样做判断。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span> <span class="o">&lt;-</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;通道写入&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">close</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">c</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;通道读出:&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Finished&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*通道写入 0
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道读出: 0
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道读出: 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道写入 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道写入 2
+</span></span></span><span class="line"><span class="cl"><span class="cm">通道读出: 2
+</span></span></span><span class="line"><span class="cl"><span class="cm">Finished*/</span>
+</span></span></code></pre></div><h3 id="select">select</h3>
+<p>因此对于channel的处理，更推荐使用select。Go 语言中的 <code>select</code>语句用于对一组<code>case</code>语句进行选择，并执行对应的代码。类似<code>switch</code>，但是<code>select</code>语句中所有<code>case</code>中的表达式都必须是<code>channel</code>的发送或接收操作。Select 语句具有以下几个特点：</p>
+<ul>
+<li><code>select</code> 不存在任何的 <code>case</code>：永久阻塞当前 goroutine</li>
+<li><code>select</code> 只存在一个 <code>case</code>：阻塞的发送/接收</li>
+<li><code>select</code> 存在多个 <code>case</code>：随机选择一个满足条件的<code>case</code>执行</li>
+<li><code>select</code> 存在 <code>default</code>，其他<code>case</code>都不满足时：执行<code>default</code>语句中的代码</li>
+</ul>
+<p>先看个栗子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">x</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">ch</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="nx">i</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>首先是创建了一个缓冲区大小为1的通道 ch，进入 for 循环后：</p>
+<ul>
+<li>第一次循环时 i = 1，select 语句中包含两个 case 分支，此时由于通道中没有值可以接收，所以<code>x := &lt;-ch</code> 这个 case 分支不满足，而<code>ch &lt;- i</code>这个分支可以执行，会把1发送到通道中，结束本次 for 循环；</li>
+<li>第二次 for 循环时，i = 2，由于通道缓冲区已满，所以<code>ch &lt;- i</code>这个分支不满足，而<code>x := &lt;-ch</code>这个分支可以执行，从通道接收值1并赋值给变量 x ，所以会在终端打印出 1；</li>
+<li>后续的 for 循环以此类推会依次打印出3、5、7、9。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/go/channel/" data-title="channel笔记" data-hashtags="go"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/go/channel/" data-hashtag="go"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/go/channel/" data-title="channel笔记"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/go/channel/" data-title="channel笔记"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go/go%E6%A0%88%E5%86%85%E5%AD%98/" class="prev" rel="prev" title="go栈内存"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>go栈内存</a>
+            <a href="/posts/middleware/rocketmq%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF/" class="next" rel="next" title="rocketmq事务消息">rocketmq事务消息<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

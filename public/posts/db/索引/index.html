@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>索引 - ricky_zhf</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="索引" />
+<meta property="og:description" content="ddddd" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/db/%E7%B4%A2%E5%BC%95/" /><meta property="og:image" content="/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-04T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/img/self.gif"/>
+
+<meta name="twitter:title" content="索引"/>
+<meta name="twitter:description" content="ddddd"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/db/%E7%B4%A2%E5%BC%95/" /><link rel="prev" href="/posts/go/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" /><link rel="next" href="/posts/uu/uu_picture/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "索引",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/db\/%E7%B4%A2%E5%BC%95\/"
+        },"genre": "posts","keywords": "test","wordcount":  6575 ,
+        "url": "\/posts\/db\/%E7%B4%A2%E5%BC%95\/","datePublished": "2023-02-04T00:00:00+00:00","dateModified": "2023-02-04T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky_zhf"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ricky_zhf</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky_zhf"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ricky_zhf</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">索引</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/test/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>test</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-02-04">2023-02-04</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-02-04">2023-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 6575 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 14 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#索引">索引</a>
+      <ul>
+        <li><a href="#索引分类">索引分类</a></li>
+        <li><a href="#b树">B+树</a></li>
+        <li><a href="#聚簇索引和二级索引">聚簇索引和二级索引</a>
+          <ul>
+            <li><a href="#聚簇索引">聚簇索引</a></li>
+            <li><a href="#二级索引">二级索引</a></li>
+            <li><a href="#为什么还要聚簇索引">为什么还要聚簇索引</a></li>
+            <li><a href="#索引下推">索引下推</a></li>
+          </ul>
+        </li>
+        <li><a href="#字段特性">字段特性</a></li>
+        <li><a href="#联合索引">联合索引</a>
+          <ul>
+            <li><a href="#最左匹配">最左匹配</a></li>
+            <li><a href="#联合索引范围查询">联合索引范围查询</a></li>
+            <li><a href="#索引区分度">索引区分度</a></li>
+            <li><a href="#联合索引排序">联合索引排序</a></li>
+          </ul>
+        </li>
+        <li><a href="#什么时候不用索引">什么时候(不)用索引</a>
+          <ul>
+            <li><a href="#什么时候适用索引">什么时候适用索引？</a></li>
+            <li><a href="#什么时候不适合用索引">什么时候不适合用索引</a></li>
+          </ul>
+        </li>
+        <li><a href="#索引优化">索引优化</a></li>
+        <li><a href="#索引失效的几个情况">索引失效的几个情况</a></li>
+        <li><a href="#count">count</a>
+          <ul>
+            <li><a href="#如何优化count">如何优化count</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="索引">索引</h2>
+<p>那换到数据库中，索引的定义就是帮助存储引擎快速获取数据的一种数据结构，形象的说就是<strong>索引是数据的目录</strong>。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751143.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751143.png, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751143.png 1.5x, https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751143.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751143.png"
+        title="img" /></p>
+<h3 id="索引分类">索引分类</h3>
+<p>我们可以按照四个角度来分类索引。</p>
+<ul>
+<li>按「数据结构」分类：<strong>B+tree索引、Hash索引、Full-text索引</strong>。</li>
+<li>按「物理存储」分类：<strong>聚簇索引（主键索引）、二级索引（辅助索引）</strong>。</li>
+<li>按「字段特性」分类：<strong>主键索引、唯一索引、普通索引、前缀索引</strong>。</li>
+<li>按「字段个数」分类：<strong>单列索引、联合索引</strong>。</li>
+</ul>
+<p>B+Tree 索引类型也是 MySQL 存储引擎采用最多的索引类型。InnoDB和MyISAM都是使用的B+树索引。</p>
+<h3 id="b树">B+树</h3>
+<p>举个栗子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">product</span><span class="o">`</span><span class="w">  </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">product_no</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">price</span><span class="o">`</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BTREE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utf8</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utf8_general_ci</span><span class="w"> </span><span class="n">ROW_FORMAT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Dynamic</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751132.png" alt="img" style="zoom: 67%;" />
+<p>B+Tree 是一种多叉树，叶子节点才存放数据，非叶子节点只存放索引，而且每个节点里的数据是<strong>按主键顺序存放</strong>的。==每一层父节点的索引值都会出现在下层子节点的索引值中，因此在叶子节点中，包括了所有的索引值信息==。并且每一个叶子节点都指向下一个叶子节点，形成一个链表。</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751192.png" alt="主键索引 B+Tree" style="zoom: 50%;" />
+<p><strong>大致查询流程</strong></p>
+<p>比如，我们执行了查询语句<code>select * from table where id = 5</code>，这条语句使用了主键索引查询 id 号为 5 的商品。查询过程是这样的，B+Tree 会自顶向下逐层进行查找：</p>
+<ul>
+<li>将 5 与根节点的索引数据 (1，10，20) 比较，5 在 1 和 10 之间，所以根据 B+Tree的搜索逻辑，找到第二层的索引数据 (1，4，7)；</li>
+<li>在第二层的索引数据 (1，4，7)中进行查找，因为 5 在 4 和 7 之间，所以找到第三层的索引数据（4，5，6）；</li>
+<li>在叶子节点的索引数据（4，5，6）中进行查找，然后我们找到了索引值为 5 的行数据。</li>
+</ul>
+<p>==数据库的索引和数据都是存储在硬盘的==，我们可以把读取一个节点当作一次磁盘 I/O 操作。那么上面的整个查询过程一共经历了 3 个节点，也就是进行了 3 次 I/O 操作。</p>
+<p>==B+Tree 存储千万级的数据只需要 3-4 层高度就可以满足==，这意味着从千万级的表查询目标数据最多需要 3-4 次磁盘 I/O，所以<strong>B+Tree 相比于 B 树和二叉树来说，最大的优势在于查询效率很高，因为即使在数据量很大的情况，查询一个数据的磁盘 I/O 依然维持在 3-4次。</strong></p>
+<h3 id="聚簇索引和二级索引">聚簇索引和二级索引</h3>
+<h4 id="聚簇索引">聚簇索引</h4>
+<p>创建表时，InnoDB 存储引擎会根据不同的场景选择不同的列作为索引：</p>
+<ul>
+<li>如果有主键，默认会使用主键作为聚簇索引的索引键（key）；</li>
+<li>如果没有主键，就选择第一个不包含 NULL 值的唯一列作为聚簇索引的索引键（key）；</li>
+<li>在上面两个都没有的情况下，InnoDB 将自动生成一个隐式自增 id 列作为聚簇索引的索引键（key）；</li>
+</ul>
+<p>其它索引都属于辅助索引（Secondary Index），也被称为二级索引或非聚簇索引。<strong>创建的主键索引和二级索引默认使用的是 B+Tree 索引</strong>。</p>
+<p>聚簇索引的查询步骤和B+树介绍的流程一样。</p>
+<h4 id="二级索引">二级索引</h4>
+<p>主键索引的 B+Tree 和二级索引的 B+Tree 区别如下：</p>
+<ul>
+<li>主键索引的 B+Tree 的叶子节点存放的是实际数据，所有完整的用户记录都存放在主键索引的 B+Tree 的叶子节点里；</li>
+<li>二级索引的 B+Tree 的叶子节点存放的是==主键值==，而不是实际数据。</li>
+</ul>
+<p>我这里将前面的商品表中的 product_no （商品编码）字段设置为二级索引，那么二级索引的 B+Tree 如下图，其中非叶子的 key 值是 product_no（图中橙色部分），==叶子节点存储的数据是索引和主键值==（图中绿色部分）。</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751359.png" alt="二级索引 B+Tree" style="zoom:50%;" />
+<p>如果<code>select * from product where product_no = '0002';</code> 会先检二级索引中的 B+Tree 的索引值（商品编码，product_no），找到对应的叶子节点，然后获取主键值，==然后再通过主键索引中的 B+Tree 树查询到对应的叶子节点==，然后获取整行数据。<strong>这个过程叫「回表」，也就是说要查两个 B+Tree 才能查到数据</strong>。如下图：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751205.png" alt="回表" style="zoom: 33%;" />
+<p>不过，当要查询的字段是能在二级索引的 B+Tree 的叶子节点里查询到，这时就不用再查主键索引查，比如：<code>select id from product where product_no = '0002';</code></p>
+<p><strong>这种在二级索引的 B+Tree 就能查询到结果的过程就叫作「覆盖索引」，也就是只需要查一个 B+Tree 就能找到数据</strong>。所以实现索引覆盖的常见办法就是将可能需要被频繁查询的字段建立到联合索引中。==即：将会被查询和作为条件的字段组成联合索引，这样查询对应字段时，则可以直接通过二级索引B+树查找到叶子节点，避免回表。==</p>
+<p>==为什么二级索引的叶子结点存的是主键而不是指针？==</p>
+<p>==InnoDB在移动行的时候，无需修改二级索引，因为叶子结点存储的是主键值而不是指针。==</p>
+<h4 id="为什么还要聚簇索引">为什么还要聚簇索引</h4>
+<p>占用空间少：建表可能需要建立多个索引，如果都是聚簇索引，那占用的空间会非常大，所以用二级索引会减少空间占用。</p>
+<h4 id="索引下推">索引下推</h4>
+<p>覆盖索引是解决了索引未失效情况下回表的问题。那如果因为最左匹配原则导致索引失效了呢？==索引下推是用来解决联合索引因为最左匹配原则导致第二个索引失效进而导致回表查询的问题。==</p>
+<p>举一个具体的例子，方便大家理解，这里一张用户表如下，我对 age 和 reward 字段建立了联合索引（age，reward）：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751761.png" alt="img" style="zoom:67%;" />
+<p>现在有下面这条查询语句：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">t_user</span><span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">reward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>联合索引当遇到范围查询 (&gt;、&lt;) 就会停止匹配，也就是 <strong>age 字段能用到联合索引，但是 reward 字段则无法利用到索引</strong>。具体原因这里可以看这篇：<a href="https://xiaolincoding.com/mysql/index/index_interview.html#%e6%8c%89%e5%ad%97%e6%ae%b5%e4%b8%aa%e6%95%b0%e5%88%86%e7%b1%bb" target="_blank" rel="noopener noreffer ">索引常见面试题(opens new window)</a></p>
+<p>那么，不使用索引下推（MySQL 5.6 之前的版本）时，执行器与存储引擎的执行流程是这样的：</p>
+<ul>
+<li>Server 层首先调用存储引擎的接口定位到满足查询条件的第一条二级索引记录，也就是定位到 age &gt; 20 的第一条记录；</li>
+<li>存储引擎根据二级索引的 B+ 树快速定位到这条记录后，获取主键值，然后<strong>进行回表操作</strong>，将完整的记录返回给 Server 层；</li>
+<li>Server 层在判断该记录的 reward 是否等于 100000，如果成立则将其发送给客户端；否则跳过该记录；</li>
+<li>接着，继续向存储引擎索要下一条记录，存储引擎在二级索引定位到记录后，获取主键值，然后回表操作，将完整的记录返回给 Server 层；</li>
+<li>如此往复，直到存储引擎把表中的所有记录读完。</li>
+</ul>
+<p>可以看到，没有索引下推的时候，每查询到一条二级索引记录，都要进行回表操作，然后将记录返回给 Server，接着 Server 再判断该记录的 reward 是否等于 100000。</p>
+<p>而使用索引下推后，判断记录的 reward 是否等于 100000 的工作交给了存储引擎层，过程如下 ：</p>
+<ul>
+<li>Server 层首先调用存储引擎的接口定位到满足查询条件的第一条二级索引记录，也就是定位到 age &gt; 20 的第一条记录；</li>
+<li>存储引擎定位到二级索引后，<strong>先不执行回表</strong>操作，而是先判断一下该索引中包含的列（reward列）的条件（reward 是否等于 100000）是否成立。如果<strong>条件不成立</strong>，则直接<strong>跳过该二级索引</strong>。如果<strong>成立</strong>，则<strong>执行回表</strong>操作，将完成记录返回给 Server 层。</li>
+<li>Server 层在判断其他的查询条件（本次查询没有其他条件）是否成立，如果成立则将其发送给客户端；否则跳过该记录，然后向存储引擎索要下一条记录。</li>
+<li>如此往复，直到存储引擎把表中的所有记录读完。</li>
+</ul>
+<p>可以看到，使用了索引下推后，虽然 reward 列无法使用到联合索引，但是因为它包含在联合索引（age，reward）里，所以直接在存储引擎过滤出满足 reward = 100000 的记录后，才去执行回表操作获取整个记录。相比于没有使用索引下推，节省了很多回表操作。</p>
+<h3 id="字段特性">字段特性</h3>
+<ul>
+<li>
+<p>主键索引</p>
+</li>
+<li>
+<p>唯一索引</p>
+</li>
+<li>
+<p>普通索引</p>
+</li>
+<li>
+<p>前缀索引</p>
+</li>
+</ul>
+<p>前缀索引是指对字符类型字段的前几个字符建立的索引，而不是在整个字段上建立的索引，前缀索引可以建立在字段类型为 char、 varchar、binary、varbinary 的列上。==使用前缀索引的目的是为了减少索引占用的存储空间，提升查询效率。==</p>
+<h3 id="联合索引">联合索引</h3>
+<p>通过将多个字段组合成一个索引，该索引就被称为联合索引。比如，将商品表中的 product_no 和 name 字段组合成联合索引<code>(product_no, name)</code>，创建联合索引的方式如下：<code>CREATE INDEX index_product_no_name ON product(product_no, name); </code>联合索引<code>(product_no, name)</code> 的 B+Tree 示意图如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751274.png" alt="联合索引" style="zoom: 67%;" />
+<p>可以看到，联合索引的非叶子节点用两个字段的值作为 B+Tree 的 key 值。当在联合索引查询数据时，先按 product_no 字段比较，在 product_no 相同的情况下再按 name 字段比较。也就是说，联合索引查询的 B+Tree 是先按 product_no 进行排序，然后再 product_no 相同的情况再按 name 字段排序。</p>
+<p>因此，使用联合索引时，存在<strong>最左匹配原则</strong>，也就是按照最左优先的方式进行索引的匹配。在使用联合索引进行查询的时候，如果不遵循「最左匹配原则」，联合索引会失效，这样就无法利用到索引快速查询的特性了。</p>
+<h4 id="最左匹配">最左匹配</h4>
+<p>比如，如果创建了一个 <code>(a, b, c)</code> 联合索引，如果查询条件是以下这几种，就可以匹配上联合索引：</p>
+<ul>
+<li>where a=1；</li>
+<li>where a=1 and b=2 and c=3；</li>
+<li>where a=1 and b=2；</li>
+</ul>
+<p>需要注意的是，因为有查询优化器，所以 a 字段在 where 子句的顺序并不重要。</p>
+<p>但是，如果查询条件是以下这几种，因为不符合最左匹配原则，所以就无法匹配上联合索引，联合索引就会失效:</p>
+<ul>
+<li>where b=2；</li>
+<li>where c=3；</li>
+<li>where b=2 and c=3；</li>
+</ul>
+<p>上面这些查询条件之所以会失效，是因为<code>(a, b, c)</code> 联合索引，是先按 a 排序，在 a 相同的情况再按 b 排序，在 b 相同的情况再按 c 排序。所以，<strong>b 和 c 是==全局无序，局部相对有序的==</strong>，这样在没有遵循最左匹配原则的情况下，是无法利用到索引的。</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302121751792.png" alt="img" style="zoom: 33%;" />
+<p>可以看到，a 是全局有序的（1, 2, 2, 3, 4, 5, 6, 7 ,8），而 b 是全局是无序的（12，7，8，2，3，8，10，5，2）。因此，直接执行<code>where b = 2</code>这种查询条件没有办法利用联合索引的，<strong>利用索引的前提是索引里的 key 是有序的</strong>。</p>
+<p>只有在 a 相同的情况才，b 才是有序的，比如 a 等于 2 的时候，b 的值为（7，8），这时就是有序的，这个有序状态是局部的，因此，执行<code>where a = 2 and b = 7</code>是 a 和 b 字段能用到联合索引的，也就是联合索引生效了。</p>
+<h4 id="联合索引范围查询">联合索引范围查询</h4>
+<p>联合索引有一些特殊情况，<strong>并不是查询过程使用了联合索引查询，就代表联合索引中的所有字段都用到了联合索引进行索引查询</strong>，也就是可能存在部分字段用到联合索引的 B+Tree，部分字段没有用到联合索引的 B+Tree 的情况。</p>
+<p>这种特殊情况就发生在范围查询。==联合索引的最左匹配原则会一直向右匹配直到遇到「范围查询」就会停止匹配。<strong>也就是范围查询的字段可以用到联合索引，但是在范围查询字段的后面的字段无法用到联合索引</strong>。==</p>
+<p>MySQL 5.6 引入的<strong>索引下推优化</strong>（index condition pushdown)， <strong>可以在联合索引遍历过程中，对联合索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数</strong>。</p>
+<h4 id="索引区分度">索引区分度</h4>
+<p>另外，建立联合索引时的字段顺序，对索引效率也有很大影响。越靠前的字段被用于索引过滤的概率越高，实际开发工作中<strong>建立联合索引时，要把区分度大的字段排在前面，这样区分度大的字段越有可能被更多的 SQL 使用到</strong>。</p>
+<p>区分度就是某个字段 column 不同值的个数「除以」表的总行数。比如，性别的区分度就很小，不适合建立索引或不适合排在联合索引列的靠前的位置，而 UUID 这类字段就比较适合做索引或排在联合索引列的靠前的位置。</p>
+<h4 id="联合索引排序">联合索引排序</h4>
+<p>这里出一个题目，针对针对下面这条 SQL，你怎么通过索引来提高查询效率呢？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">create_time</span><span class="w"> </span><span class="k">asc</span><span class="w">
+</span></span></span></code></pre></div><p>更好的方式给 status 和 create_time 列建立一个联合索引，因为这样可以避免 MySQL 数据库发生文件排序。</p>
+<p>因为在查询时，如果只用到 status 的索引，但是这条语句还要对 create_time 排序，这时就要用文件排序 filesort，也就是在 SQL 执行计划中，Extra 列会出现 Using filesort。</p>
+<p>==所以，要利用索引的有序性，在 status 和 create_time 列建立联合索引，这样根据 status 筛选后的数据就是按照 create_time 排好序的，避免在文件排序，提高了查询效率.==</p>
+<h3 id="什么时候不用索引">什么时候(不)用索引</h3>
+<p>索引最大的好处是提高查询速度，但是索引也是有缺点的，比如：</p>
+<ul>
+<li>需要占用物理空间，数量越大，占用空间越大；</li>
+<li>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增大；</li>
+<li>会降低表的增删改的效率，因为每次增删改索引，B+ 树为了维护索引有序性，都需要进行动态维护。</li>
+</ul>
+<h4 id="什么时候适用索引">什么时候适用索引？</h4>
+<ul>
+<li>字段有唯一性限制的，比如商品编码；</li>
+<li>经常用于 <code>WHERE</code> 查询条件的字段，这样能够提高整个表的查询速度，如果查询条件不是一个字段，可以建立联合索引。</li>
+<li>经常用于 <code>GROUP BY</code> 和 <code>ORDER BY</code> 的字段，这样在查询的时候就不需要再去做一次排序了，因为我们都已经知道了建立索引之后在 B+Tree 中的记录都是排序好的。</li>
+</ul>
+<h4 id="什么时候不适合用索引">什么时候不适合用索引</h4>
+<ul>
+<li><code>WHERE</code> 条件，<code>GROUP BY</code>，<code>ORDER BY</code> 里用不到的字段，索引的价值是快速定位，如果起不到定位的字段通常是不需要创建索引的，因为索引是会占用物理空间的。</li>
+<li>字段中存在大量重复数据，不需要创建索引，比如性别字段，只有男女，如果数据库表中，男女的记录分布均匀，那么无论搜索哪个值都可能得到一半的数据。在这些情况下，还不如不要索引，因为 MySQL 还有一个查询优化器，查询优化器发现某个值出现在表的数据行中的百分比很高的时候，它一般会忽略索引，进行全表扫描。</li>
+<li>表数据太少的时候，不需要创建索引；</li>
+<li>经常更新的字段不用创建索引，比如不要对电商项目的用户余额建立索引，因为索引字段频繁修改，由于要维护 B+Tree的有序性，那么就需要频繁的重建索引，这个过程是会影响数据库性能的。</li>
+</ul>
+<h3 id="索引优化">索引优化</h3>
+<ul>
+<li>
+<p>前缀索引优化：使用前缀索引是为了减小索引字段大小，可以增加一个索引页中存储的索引值，有效提高索引的查询速度。在一些大字符串的字段作为索引时，使用前缀索引可以帮助我们减小索引项的大小。</p>
+</li>
+<li>
+<p>覆盖索引优化：将需要查询的字段和条件中的字段组成联合所以，这样就只需要查一次二级索引的B+树就可以获得全部数据。</p>
+</li>
+<li>
+<p>主键索引最好是自增的：<strong>如果我们使用自增主键</strong>，那么每次插入的新数据就会按顺序添加到当前索引节点的位置，不需要移动已有的数据，当页面写满，就会自动开辟一个新页面。因为每次<strong>插入一条新记录，都是追加操作，不需要重新移动数据</strong>，因此这种插入数据的方法效率非常高。</p>
+<p><strong>如果我们使用非自增主键</strong>，由于每次插入主键的索引值都是随机的，因此每次插入新的数据时，就可能会插入到现有数据页中间的某个位置，这将不得不移动其它数据来满足新数据的插入，甚至需要从一个页面复制数据到另外一个页面，我们通常将这种情况称为<strong>页分裂</strong>。<strong>页分裂还有可能会造成大量的内存碎片，导致索引结构不紧凑，从而影响查询效率</strong>。</p>
+</li>
+<li>
+<p>索引最好设置为not null：索引列存在 NULL 就会导致优化器在做索引选择的时候更加复杂，更加难以优化，因为可为 NULL 的列会使索引、索引统计和值比较都更复杂，比如进行索引统计时，count 会省略值为NULL 的行。NULL 值是一个没意义的值，但是它会占用物理空间，所以会带来的存储空间的问题，会导致更多的存储空间占用。</p>
+</li>
+<li>
+<p>防止索引失效；</p>
+</li>
+</ul>
+<h3 id="索引失效的几个情况">索引失效的几个情况</h3>
+<p>七字口诀：<strong>模 型 数 空 运 最 快</strong></p>
+<ul>
+<li>
+<p><strong>模</strong>：<a href="https://www.zhihu.com/search?q=%e6%a8%a1%e7%b3%8a%e6%9f%a5%e8%af%a2&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra=%7b%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A%222251613556%22%7d" target="_blank" rel="noopener noreffer ">模糊查询</a>的意思。like的模糊查询以%开头，索引失效。比如：SELECT * FROM <code>user</code> WHERE <code>name</code> LIKE &lsquo;%老猿&rsquo;;</p>
+</li>
+<li>
+<p><strong>型</strong>：代表数据类型。类型错误，如字段类型为varchar，where条件用number，索引也会失效。比如：SELECT * FROM <code>user</code> WHERE height= 180; height为varchar类型导致索引失效。</p>
+</li>
+<li>
+<p><strong>数</strong>：是函数的意思。对索引的字段使用内部函数，索引也会失效。这种情况下应该建立基于函数的索引。比如：SELECT * FROM USER WHERE DATE(create_time) = &lsquo;2020-09-03&rsquo;; create_time字段设置索引，那就无法使用函数，否则索引失效。</p>
+</li>
+<li>
+<p><strong>空</strong>：是Null的意思。索引不存储空值，如果不限制索引列是not null，数据库会认为索引列有可能存在空值，所以不会按照索引进行计算。</p>
+</li>
+<li>
+<p><strong>运</strong>：运算的意思。对索引列进行（+，-，*，/，!, !=, &lt;&gt;）等运算，会导致索引失效。比如：</p>
+<p>SELECT * FROM USER WHERE age - 1 = 20;</p>
+</li>
+<li>
+<p><strong>最</strong>：是最左原则。在复合索引中索引列的顺序至关重要。如果不是按照索引的最左列开始查找，则无法使用索引。</p>
+</li>
+<li>
+<p><strong>快</strong>：全表扫描更快的意思。如果数据库预计使用全表扫描要比使用索引快，则不使用索引。</p>
+</li>
+</ul>
+<h3 id="count">count</h3>
+<p>count(1)、 count(*)、 count(主键字段)在执行的时候，如果表里存在二级索引，优化器就会选择二级索引进行扫描。</p>
+<p>所以，如果要执行 count(1)、 count(*)、 count(主键字段) 时，尽量在数据表上建立二级索引，这样优化器会自动采用 key_len 最小的二级索引进行扫描，相比于扫描主键索引效率会高一些。</p>
+<p>再来，就是不要使用 count(字段) 来统计记录个数，因为它的效率是最差的，会采用全表扫描的方式来统计。如果你非要统计表中该字段不为 NULL 的记录个数，建议给这个字段建立一个二级索引。</p>
+<h4 id="如何优化count">如何优化count</h4>
+<p>如果你的业务对于统计个数不需要很精确，比如搜索引擎在搜索关键词的时候，给出的搜索结果条数是一个大概值。这时，我们就可以使用 show table status 或者 explain 命令来表进行估算。执行 explain 命令效率是很高的，因为它并不会真正的去查询，下图中的 rows 字段值就是 explain 命令对表 t_order 记录的估算值。</p>
+<p>如果是想精确的获取表的记录总数，我们可以将这个计数值保存到单独的一张计数表中。当我们在数据表插入一条记录的同时，将计数表中的计数字段 + 1。也就是说，在新增和删除操作时，我们需要额外维护这个计数表。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="/posts/db/%E7%B4%A2%E5%BC%95/" data-title="索引" data-hashtags="test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="/posts/db/%E7%B4%A2%E5%BC%95/" data-hashtag="test"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="/posts/db/%E7%B4%A2%E5%BC%95/" data-title="索引"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="/posts/db/%E7%B4%A2%E5%BC%95/" data-title="索引"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/test/">test</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="prev" rel="prev" title="设计模式"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>设计模式</a>
+            <a href="/posts/uu/uu_picture/" class="next" rel="next" title="uu_pictures">uu_pictures<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>功能优化 - zhf的技术博客</title><meta name="Description" content="zhou huaifeng"><meta property="og:title" content="功能优化" />
+<meta property="og:description" content="对hugo和loveit主题做些定制化修改" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rickyzhf.cc/posts/hugo/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/" /><meta property="og:image" content="https://rickyzhf.cc/img/self.gif"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-01T00:00:00+00:00" /><meta property="og:site_name" content="Ricky ZhouHuaiFeng" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://rickyzhf.cc/img/self.gif"/>
+
+<meta name="twitter:title" content="功能优化"/>
+<meta name="twitter:description" content="对hugo和loveit主题做些定制化修改"/>
+<meta name="application-name" content="ricky_zhf">
+<meta name="apple-mobile-web-app-title" content="ricky_zhf"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/img/self.gif"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rickyzhf.cc/posts/hugo/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/" /><link rel="next" href="https://rickyzhf.cc/posts/go/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "功能优化",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rickyzhf.cc\/posts\/hugo\/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96\/"
+        },"genre": "posts","keywords": "hugo, loveit","wordcount":  3102 ,
+        "url": "https:\/\/rickyzhf.cc\/posts\/hugo\/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96\/","datePublished": "2023-01-04T00:00:00+00:00","dateModified": "2023-02-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/">🏠  主页 </a><a class="menu-item" href="/categories/">🗂️ 类目 </a><a class="menu-item" href="/posts/">🕥 时间 </a><a class="menu-item" href="/tags/">🏷️ 标签 </a><a class="menu-item" href="/about/">🪪 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="zhf的技术博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/self.gif"
+        data-srcset="/img/self.gif, /img/self.gif 1.5x, /img/self.gif 2x"
+        data-sizes="auto"
+        alt="/img/self.gif"
+        title="/img/self.gif" />ZHF技术博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title="">🏠 主页</a><a class="menu-item" href="/categories/" title="">🗂️类目</a><a class="menu-item" href="/posts/" title="">🕥时间</a><a class="menu-item" href="/tags/" title="">🏷️标签</a><a class="menu-item" href="/about/" title="">🪪关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"autonumber><h1 class="single-title animate__animated animate__flipInX">功能优化</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/hugo/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>hugo</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2023-01-04">2023-01-04</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2023-02-01">2023-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3102 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#lastmod显示与自动更新">lastmod显示与自动更新</a>
+      <ul>
+        <li><a href="#显示">显示</a></li>
+        <li><a href="#自动更新">自动更新</a></li>
+      </ul>
+    </li>
+    <li><a href="#typora文本高亮语法适配">typora文本高亮语法适配</a></li>
+    <li><a href="#标题修改">标题修改</a></li>
+    <li><a href="#标题背景">标题背景</a></li>
+    <li><a href="#标题自动编号">标题自动编号</a></li>
+    <li><a href="#目录自动编号">目录自动编号</a>
+      <ul>
+        <li><a href="#ordered">ordered</a></li>
+        <li><a href="#js">js</a></li>
+      </ul>
+    </li>
+    <li><a href="#时间页显示最新5条">时间页显示最新5条</a></li>
+    <li><a href="#百度收录">百度收录</a></li>
+    <li><a href="#百度统计">百度统计</a></li>
+    <li><a href="#标题动一下特效">标题动一下特效</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="前言">前言</h2>
+<p>使用hugo+loveIt主题搭建的博客，优化也是在此基础上做的，其他工具和主题仅供参考。</p>
+<p>本人主业并不是前端相关，所以如果有更好的办法欢迎讨论~</p>
+<h2 id="lastmod显示与自动更新">lastmod显示与自动更新</h2>
+<h3 id="显示">显示</h3>
+<p>默认主页不显示文章的更新时间，所以需要对该部分内容定制修改下。首先找到<code>/themes/LoveIt/layouts/_default/summary.html</code>，然后复制到<code>/layouts/_default/summary.html</code>，并将该文件中的如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{- with .Site.Params.dateFormat | default &#34;2006-01-02&#34; | .PublishDate.Format -}}
+</span></span><span class="line"><span class="cl"><span class="ni">&amp;nbsp;</span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-publish&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- printf `<span class="p">&lt;</span><span class="nt">time</span> <span class="na">datetime</span><span class="o">=</span><span class="s">&#34;%v&#34;</span><span class="p">&gt;</span>%v<span class="p">&lt;/</span><span class="nt">time</span><span class="p">&gt;</span>` . . | dict &#34;Date&#34; | T &#34;publishedOnDate&#34; | safeHTML -}}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{- end -}}
+</span></span></code></pre></div><p>修改为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{- with .Site.Params.dateFormat | default &#34;2006-01-02&#34; | .PublishDate.Format -}}
+</span></span><span class="line"><span class="cl"><span class="ni">&amp;nbsp;</span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-publish&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- printf `<span class="p">&lt;</span><span class="nt">time</span> <span class="na">datetime</span><span class="o">=</span><span class="s">&#34;%v&#34;</span><span class="p">&gt;</span>%v<span class="p">&lt;/</span><span class="nt">time</span><span class="p">&gt;</span>` . . | dict &#34;Date&#34; | T &#34;publishedOnDate&#34; | safeHTML -}}, 
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{- end -}}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{{- with .Site.Params.dateFormat | default &#34;2006-01-02&#34; | .Lastmod.Format -}}
+</span></span><span class="line"><span class="cl"><span class="ni">&amp;nbsp;</span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-publish&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- printf `<span class="p">&lt;</span><span class="nt">time</span> <span class="na">datetime</span><span class="o">=</span><span class="s">&#34;%v&#34;</span><span class="p">&gt;</span>%v<span class="p">&lt;/</span><span class="nt">time</span><span class="p">&gt;</span>` . . | dict &#34;Date&#34; | T &#34;updatedOnDate&#34; | safeHTML -}}, 
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{- end -}}
+</span></span></code></pre></div><h3 id="自动更新">自动更新</h3>
+<p>在hugo的配置文件config.toml中新增配置项：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">frontmatter</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">lastmod</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;:fileModTime&#34;</span><span class="p">,</span> <span class="s2">&#34;lastmod&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p>如果是yml文件则为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">frontmatter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">lastmod</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;:fileModTime&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;lastmod&#34;</span><span class="p">]</span><span class="w">
+</span></span></span></code></pre></div><h2 id="typora文本高亮语法适配">typora文本高亮语法适配</h2>
+<p>目前typora(0.11版本)的高亮语法为<code>==highlight==</code>，但是typora中所见的高亮部分在博客中是无法被正常渲染的，如下图所示：</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302132209461.png" alt="image-20230213220951436" style="zoom: 50%;" />
+<p>大致原因是其与传统的markdown高亮语法<code>&lt;mark&gt;highlight&lt;/mark&gt;</code>不同导致。</p>
+<p>既然这样就改用<code>&lt;mark&gt;&lt;/mark&gt;</code>标记来高亮文本内容，但是这样博客上还是无法正常渲染，还需要在<code>config.toml</code>中添加配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">markup</span><span class="p">.</span><span class="nx">goldmark</span><span class="p">.</span><span class="nx">renderer</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">unsafe</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span></code></pre></div><p>到这基本上就解决问题了。</p>
+<p>如果想偷懒的话可以用搜狗输入法的自定义短语来实现快捷输入<code>&lt;mark&gt;&lt;/mark&gt;</code>的效果。</p>
+<p>此外，如果嫌定义两个快捷输入——<code>&lt;mark&gt;</code>和<code>&lt;/mark&gt;</code>麻烦的话，可以只定义一个<code>&lt;mark&gt;</code>，只不过这样虽然博客上能正常渲染，但typora中<code>&lt;mark&gt;</code>不会自动隐藏，比较丑，看个人选择了。</p>
+<h2 id="标题修改">标题修改</h2>
+<p>如果不喜欢原主题二级标题前的<code>#</code>或者其他标题前的<code>|</code>可以去掉该部分。</p>
+<p>找到文件/themes/LoveIt/assets/css/_page/_single.scss，删除或者注释掉header-mark中的部分即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nt">h6</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">&gt;</span> <span class="err">.</span><span class="n">header-mark</span><span class="p">:</span><span class="o">:</span><span class="n">before</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="k">content</span><span class="o">:</span> <span class="s2">&#34;|&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">margin-right</span><span class="p">:</span> <span class="mf">.3125</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="err">$</span><span class="n">single-link-color</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="err">[theme=dark]</span> <span class="err">&amp;</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">color</span><span class="p">:</span> <span class="err">$</span><span class="n">single-link-color-dark</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nt">h2</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">header-mark</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">//</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="标题背景">标题背景</h2>
+<p>在_custom.cscc文件中添加：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/* 标题 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">page</span><span class="p">.</span><span class="nc">single</span> <span class="nt">h2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">//背景图阴影</span>
+</span></span><span class="line"><span class="cl">    <span class="err">//</span><span class="k">box-shadow</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span><span class="p">,</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="mi">1</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span> <span class="mi">6</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">//文字</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">43</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-family</span><span class="p">:</span> <span class="err">微软雅黑</span><span class="p">,</span> <span class="err">宋体</span><span class="p">,</span> <span class="err">黑体</span><span class="p">,</span> <span class="n">Arial</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">line-height</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">//</span><span class="k">text-shadow</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mf">0.594</span><span class="p">)</span> <span class="mi">2</span><span class="kt">px</span> <span class="mi">3</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mf">0.608</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span><span class="p">;</span> <span class="err">//圆角</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-width</span><span class="p">:</span> <span class="kc">initial</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-style</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-color</span><span class="p">:</span> <span class="kc">initial</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-image</span><span class="p">:</span> <span class="kc">initial</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">padding</span><span class="p">:</span> <span class="mi">7</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">margin</span><span class="p">:</span> <span class="mi">18</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">18</span><span class="kt">px</span> <span class="mi">-5</span><span class="kt">px</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="标题自动编号">标题自动编号</h2>
+<p>然后在layout/posts/single.html中(如果没有该文件需要从/themes/LoveIt/layout/posts/single.html拷贝)找到如下内容:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"> <span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;page single&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{- /* Title */ -}}
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;single-title animate__animated animate__flipInX&#34;</span><span class="p">&gt;</span>{{ .Title | emojify }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   ...
+</span></span></code></pre></div><p>修改为如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{- $autonumber := .Param &#34;autonumber&#34; | default true -}}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;page single&#34;</span> <span class="err">{{</span><span class="na">-</span> <span class="na">if</span> <span class="na">eq</span> <span class="err">$</span><span class="na">autonumber</span> <span class="na">true</span> <span class="na">-</span><span class="err">}}</span> <span class="na">autonumber</span> <span class="err">{{</span><span class="na">-</span> <span class="na">end</span> <span class="na">-</span><span class="err">}}</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- /* Title */ -}}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;single-title animate__animated animate__flipInX&#34;</span><span class="p">&gt;</span>{{ .Title | emojify }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  ...
+</span></span></code></pre></div><p>这样配置是文章默认自动生成标题编号。如果某文章不需要该功能，则在md文件的yml中添加如下配置项即可:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">autonumber</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span></code></pre></div><p>然后在/assets/css/_custom.scss文件中(没有则新建)添加如下内容:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">h1</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h2</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h3</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h4</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h4</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="o">[</span><span class="nt">autonumber</span><span class="o">]</span> <span class="nt">h2</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span><span class="k">counter-increment</span><span class="p">:</span> <span class="n">h2</span><span class="p">;</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="s2">&#34; &#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="o">[</span><span class="nt">autonumber</span><span class="o">]</span> <span class="nt">h3</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span><span class="k">counter-increment</span><span class="p">:</span> <span class="n">h3</span><span class="p">;</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="s2">&#34;.&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h3</span><span class="p">)</span> <span class="s2">&#34; &#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="o">[</span><span class="nt">autonumber</span><span class="o">]</span> <span class="nt">h4</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span><span class="k">counter-increment</span><span class="p">:</span> <span class="n">h4</span><span class="p">;</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="s2">&#34;.&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h3</span><span class="p">)</span> <span class="s2">&#34;.&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h4</span><span class="p">)</span> <span class="s2">&#34; &#34;</span><span class="p">}</span>
+</span></span></code></pre></div><p>后续因为标题带有<code>#</code>和<code>|</code>并不好看，参考<a href="#%e6%a0%87%e9%a2%98%e4%bf%ae%e6%94%b9" rel="">标题修改</a>删除这两个标签，但是这样就丢失了标题的超链接。</p>
+<p>如果想添加标题超链接，可以修改为:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">h1</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h2</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h3</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h4</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h4</span> <span class="p">{</span><span class="k">counter-reset</span><span class="p">:</span> <span class="n">h5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="o">[</span><span class="nt">autonumber</span><span class="o">]</span> <span class="nt">h2</span> <span class="o">&gt;</span> <span class="nt">a</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span><span class="k">counter-increment</span><span class="p">:</span> <span class="n">h2</span><span class="p">;</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="s2">&#34; &#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="o">[</span><span class="nt">autonumber</span><span class="o">]</span> <span class="nt">h3</span> <span class="o">&gt;</span> <span class="nt">a</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span><span class="k">counter-increment</span><span class="p">:</span> <span class="n">h3</span><span class="p">;</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="s2">&#34;.&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h3</span><span class="p">)</span> <span class="s2">&#34; &#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="o">[</span><span class="nt">autonumber</span><span class="o">]</span> <span class="nt">h4</span> <span class="o">&gt;</span> <span class="nt">a</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span><span class="k">counter-increment</span><span class="p">:</span> <span class="n">h4</span><span class="p">;</span> <span class="k">content</span><span class="p">:</span> <span class="s2">&#34;#&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="s2">&#34;.&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h3</span><span class="p">)</span> <span class="s2">&#34;.&#34;</span> <span class="nb">counter</span><span class="p">(</span><span class="n">h4</span><span class="p">)</span> <span class="s2">&#34; &#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h2 id="目录自动编号">目录自动编号</h2>
+<p>目录编号也有两种方案，均是从二级标题开始编号，如果需要从一级标题开始自行修改下即可。</p>
+<h3 id="ordered">ordered</h3>
+<p>这种是自带的方案，在config文件中添加如下配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">markup</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">markup</span><span class="p">.</span><span class="nx">tableOfContents</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">endLevel</span> <span class="p">=</span> <span class="mi">5</span> <span class="c">#编号结束级别</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">startLevel</span> <span class="p">=</span> <span class="mi">2</span> <span class="c">#编号开始级别</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">ordered</span> <span class="p">=</span> <span class="kc">true</span> <span class="c">#开启自动编号</span>
+</span></span></code></pre></div><p>但是这样子标题的编号不会带上上一级标题。如下:</p>
+<img src="https://cdn.jsdelivr.net/gh/ricky-zhf/images/img/202302141143742.png" alt="image-20230214114310701" style="zoom:67%;" />
+<h3 id="js">js</h3>
+<p>在/static/js/custom.js(没有则新建)中添加如下内容:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">toc</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">prefex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">parent</span><span class="p">.</span><span class="nx">children</span><span class="p">(</span><span class="s2">&#34;ul&#34;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">$ul</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">$ul</span><span class="p">.</span><span class="nx">children</span><span class="p">(</span><span class="s2">&#34;li&#34;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">listStr</span> <span class="o">=</span> <span class="nx">prefex</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">$li</span><span class="p">.</span><span class="nx">children</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">listStr</span> <span class="o">!=</span> <span class="s2">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">            <span class="nx">listStr</span> <span class="o">+=</span> <span class="s2">&#34;.&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">listStr</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">$li</span><span class="p">.</span><span class="nx">index</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">$li</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">listStr</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="nx">$li</span><span class="p">.</span><span class="nx">html</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">toc</span><span class="p">(</span><span class="nx">$li</span><span class="p">,</span> <span class="nx">listStr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">toc</span><span class="p">(</span><span class="nx">$li</span><span class="p">,</span> <span class="nx">listStr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">$t</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#TableOfContents&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">toc</span><span class="p">(</span><span class="nx">$t</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>这种办法各级标题编号都会带上上一级标题编号。</p>
+<p>如果不喜欢目录编号后的<code>|</code>可以在<code>themes/LoveIt/assets/css/_partial/_single/_toc.scss</code>中找到如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">toc-content</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">toc</span><span class="o">-</span><span class="n">content</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">ul</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">text-indent</span><span class="p">:</span> <span class="mf">-0.85</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">padding-left</span><span class="p">:</span> <span class="mf">.8</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">list-style</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">a</span><span class="p">:</span><span class="kc">first</span><span class="o">-</span><span class="n">child</span><span class="o">::</span><span class="n">before</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">content</span><span class="o">:</span> <span class="s2">&#34;|&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bolder</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">margin-right</span><span class="p">:</span> <span class="mf">.5</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">color</span><span class="p">:</span> <span class="err">$</span><span class="n">single-link-color</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">[theme=dark]</span> <span class="err">&amp;</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">color</span><span class="p">:</span> <span class="err">$</span><span class="n">single-link-color-dark</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nt">ul</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">padding-left</span><span class="p">:</span> <span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span></code></pre></div><p>对<code>:before</code>中内容进行修改即可</p>
+<h2 id="时间页显示最新5条">时间页显示最新5条</h2>
+<p>首先在config.toml中添加新的配置项：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">section</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lastUpdatedSize</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span></code></pre></div><p>接着修改<code>/layouts/_default/section.html</code>(如果没有该文件需要从<code>/themes/LoveIt/layouts/_default/section.html</code>拷贝)，在文件<code>{{- /* Paginate */ -}}</code>上方插入如下代码:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">{</span><span class="err">{-</span> <span class="c">/* Last Modified */</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="err">{-</span> <span class="err">$</span><span class="n">lastUpdatedSize</span> <span class="p">:</span><span class="o">=</span> <span class="o">.</span><span class="n">Site</span><span class="o">.</span><span class="n">Params</span><span class="o">.</span><span class="n">section</span><span class="o">.</span><span class="n">lastUpdatedSize</span> <span class="o">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="err">{-</span> <span class="err">if</span> <span class="err">$lastUpdatedSize</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span><span class="err">{-</span> <span class="err">if</span> <span class="err">.Pages</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="err">{-</span> <span class="err">$</span><span class="n">pages</span> <span class="p">:</span><span class="o">=</span> <span class="o">.</span><span class="n">Pages</span><span class="o">.</span><span class="n">ByLastmod</span><span class="o">.</span><span class="n">Reverse</span> <span class="o">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&lt;</span><span class="nt">h3</span> <span class="nt">class</span><span class="o">=</span><span class="s2">&#34;group-title&#34;</span><span class="o">&gt;</span><span class="nt">最近更新</span> <span class="o">&lt;</span><span class="nt">sup</span><span class="o">&gt;</span><span class="p">{</span><span class="err">{-</span> <span class="err">$lastUpdatedSize</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span><span class="o">&lt;/</span><span class="nt">sup</span><span class="o">&gt;&lt;/</span><span class="nt">h3</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="err">{-</span> <span class="err">range</span> <span class="err">first</span> <span class="err">$lastUpdatedSize</span> <span class="err">$pages</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">			<span class="o">&lt;</span><span class="nt">article</span> <span class="nt">class</span><span class="o">=</span><span class="s2">&#34;archive-item&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nt">a</span> <span class="nt">href</span><span class="o">=</span><span class="s2">&#34;{{ .RelPermalink }}&#34;</span> <span class="nt">class</span><span class="o">=</span><span class="s2">&#34;archive-item-link&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">					<span class="p">{</span><span class="err">{-</span> <span class="err">.Title</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">				<span class="o">&lt;/</span><span class="nt">a</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nt">span</span> <span class="nt">class</span><span class="o">=</span><span class="s2">&#34;archive-item-date&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">					<span class="p">{</span><span class="err">{-</span> <span class="err">$.Site.Params.section.dateFormat</span> <span class="err">|</span> <span class="err">default</span> <span class="err">&#34;01-02&#34;</span> <span class="err">|</span> <span class="err">.Date.Format</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">				<span class="o">&lt;/</span><span class="nt">span</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="o">&lt;/</span><span class="nt">article</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="err">{-</span> <span class="err">end</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span><span class="err">{-</span> <span class="err">end</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="err">{-</span> <span class="err">end</span> <span class="err">-</span><span class="p">}</span><span class="err">}</span>
+</span></span></code></pre></div><p>至此就算搞定了。</p>
+<p>但是配置后发现最新更新文章的时间格式和其他时间格式不一样，强迫症看着有点难受。所以在配置文件中做如下修改:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">section</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># 日期格式修改为如下内容</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">dateFormat</span> <span class="p">=</span> <span class="s2">&#34;2006-01-02&#34;</span>
+</span></span></code></pre></div><p>这样因为时间格式太长又会导致换行，所以还需要找到<code>LoveIt/assets/css/_partial/_archive/_terms.scss</code>文件中<code>.archive-item-date </code>段落，注释掉<code>width: 5em;</code>即可</p>
+<h2 id="百度收录">百度收录</h2>
+<p>实现博客内容能够在百度中被查询到。</p>
+<p>登录<a href="https://ziyuan.baidu.com" target="_blank" rel="noopener noreffer ">百度资源</a>，选择 用户中心-&gt;站点管理-&gt;添加网站，然后添加网站域名。在第三步使用文件验证，将验证文件放到static文件夹下，如果直接通过<code>域名:文件名</code>能够访问，则ok。最后点击完成验证。</p>
+<p>随后选择搜索服务-&gt;普通收录-&gt;sitemap，然后输入<code>域名:sitemap.xml</code>。由于hugo会在public下自动生成sitemap文件，所以无需新增。但是如果config文件中没有配置需要添加下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># 网站地图配置</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">sitemap</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">changefreq</span> <span class="p">=</span> <span class="s2">&#34;weekly&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">filename</span> <span class="p">=</span> <span class="s2">&#34;sitemap.xml&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">priority</span> <span class="p">=</span> <span class="mf">0.5</span>
+</span></span></code></pre></div><p>然后点击提交即可。</p>
+<h2 id="百度统计">百度统计</h2>
+<p>通过百度统计网点流量信息等内容。</p>
+<p>首先需要注册下，登录<a href="https://tongji.baidu.com/" target="_blank" rel="noopener noreffer ">百度统计网站</a>，然后注册或者登录后，在使用设置-&gt;账户设置-&gt;网站列表中新增网站，输入自己的域名和其他相关内容完成添加。</p>
+<p>随后点击获取代码，复制<code>hm.src = &quot;https://hm.baidu.com/hm.js?</code>后的数字内容，添加到下面配置项中的id属性。</p>
+<p>在config文件中添加如下内容(可以只添加baidu部分)：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="c"># LoveIt 新增 | 0.2.0 网站分析配置</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># Analytics config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">analytics</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  	<span class="nx">enable</span> <span class="p">=</span> <span class="kc">true</span> <span class="c">#这里记得设置为true</span>
+</span></span><span class="line"><span class="cl">		<span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 百度统计</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">baidu</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">id</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c">#输入上面复制的id</span>
+</span></span></code></pre></div><p>然后拷贝<code>\themes\LoveIt\layouts\partials\plugin\analytics.html</code>到<code>\layouts\partials\plugin\analytics.html</code>。</p>
+<p>打开拷贝后的analytics.html文件，在<code>Fathom Analytics</code>的代码下面加上如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">	{{- /* Baidu Analytics */ -}}
+</span></span><span class="line"><span class="cl">    {{- with $analytics.baidu.id -}}
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="kd">var</span> <span class="nx">_hmt</span> <span class="o">=</span> <span class="nx">_hmt</span> <span class="o">||</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">			<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			  <span class="kd">var</span> <span class="nx">hm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;script&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			  <span class="nx">hm</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&#34;https://hm.baidu.com/hm.js?{{ . }}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			  <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&#34;script&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">			  <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">hm</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">})();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	{{- end -}}
+</span></span></code></pre></div><p>然后在百度统计网站的网站列表页点击代码检查即可检查是否正确配置。</p>
+<p>成功后一般过5-20即可查看网站流量数据。</p>
+<h2 id="标题动一下特效">标题动一下特效</h2>
+<p>修改在layouts/taxonomy下的terms.html和layouts/_default的section.html两个文件，修改<code>h2 class =</code>后面的部分为如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">single-title animate__animated animate__pulse animate__faster
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://rickyzhf.cc/posts/hugo/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/" data-title="功能优化" data-hashtags="hugo,loveit"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://rickyzhf.cc/posts/hugo/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/" data-hashtag="hugo"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://rickyzhf.cc/posts/hugo/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/" data-title="功能优化"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://rickyzhf.cc/posts/hugo/%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/" data-title="功能优化"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/hugo/">hugo</a>,&nbsp;<a href="/tags/loveit/">loveit</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/go/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="next" rel="next" title="设计模式">设计模式<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                <span id="run-time"></span>
+            </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a style="color:#000" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023011986号-1 | </a>  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502009810" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/img/beian.png" style="float:left;"/>粤公网安备 44030502009810号</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?7bc6bd2807bc80753aa301722537a86e";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script></body>
+</html>
