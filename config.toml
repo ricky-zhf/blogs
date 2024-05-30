@@ -4,7 +4,7 @@ baseURL = "https://rickyzhf.cc/"
 theme = "LoveIt"
 
 # 网站标题
-title = "zhf的技术博客"
+title = "rickyy"
 
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN"]
 languageCode = "zh-CN"
