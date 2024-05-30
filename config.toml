@@ -123,7 +123,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # LOGO 的 URL
       logo = "/img/self.gif"
       # 标题名称
-      name = "ZHF技术博客"
+      name = "ricky's blogs"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
@@ -143,11 +143,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # 主页显示头像的 URL
       avatarURL = "/img/self.gif"
       # LoveIt 更改 | 0.2.7 主页显示的网站标题 (支持 HTML 格式)
-      title = "周槐枫的技术博客"
+      title = "Hi"
       # 主页显示的网站副标题 (允许 HTML 格式)
-      subtitle = "卷。。卷。。卷"
+      subtitle = "^.^"
       # 是否为副标题显示打字机动画
-      typeit = true
+      typeit = false
       # 是否显示社交账号
       social = true
       # LoveIt 新增 | 0.2.0 免责声明 (支持 HTML 格式)
